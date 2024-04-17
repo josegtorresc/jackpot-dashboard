@@ -1,0 +1,160 @@
+a {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: #fff !important;
+}
+
+.container-general-dash {
+  max-width: 100% !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  overflow-x: hidden;
+}
+
+.canvas-dashboard-web {
+  height: 100vh;
+  background-color: #ebebeb !important;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden;
+}
+
+.container-canvas-dashboard-web {
+  max-width: 100% !important;
+  padding: 15px 50px 35px 35px;
+}
+
+.banner-dash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #e44d26, #f16529);
+  width: 100%;
+  height: 250px;
+  border-radius: 15px;
+  position: relative !important;
+  overflow: hidden;
+}
+
+.span-text-banner-date {
+  align-items: center;
+  background-color: hsla(0, 0%, 100%, 0.3);
+  border: 3px solid #fff;
+  border-radius: 100px;
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  width: 100px;
+}
+
+.title-item-banner {
+  color: #fff;
+  font-size: 23px;
+  line-height: 2.1rem;
+}
+
+.title-banner-container-text {
+  color: #fff;
+  margin-right: 40px;
+}
+
+.title-banner-span-copy {
+  position: absolute;
+  bottom: -100px;
+  left: 10%;
+  font-size: 170px;
+  font-weight: bold;
+  opacity: 0.14;
+  color: #fff;
+}
+
+.carousel-container {
+  width: 100% !important; /* O el ancho deseado */
+  overflow: hidden;
+}
+
+.container-title-top-dash-general {
+  position: relative;
+  padding: 35px 35px 20px 35px;
+}
+
+.title-top-dash-general {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+  opacity: 0.88;
+}
+
+.dropdown-dash {
+  margin-right: 15px;
+  float: right;
+  display: inline-block !important;
+}
+
+.btn-secondary {
+  color: #000;
+  background-color: #fff;
+  border-radius: 15px !important;
+  padding: 11px 45px;
+  border: 1px solid #e44d26;
+  transition: 0.5s;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(to right, #e44d26, #f16529);
+  border: 1px solid #fff;
+  transition: 0.5s;
+}
+
+.title-top-dash-hour {
+  font-size: 25px;
+  margin-right: 25px;
+  margin-top: 10px;
+  margin-bottom: 0px !important;
+  display: inline-block;
+  float: right;
+}
+
+.dropdown-menu {
+  padding: 20px !important;
+  border-radius: 15px !important;
+}
+
+.dropdown-toggle:focus {
+  background-color: #f16529 !important;
+}
+
+.btn.dropdown-toggle:focus {
+  outline: none !important;
+}
+
+.dropdown-item {
+  padding: 10px;
+}
+
+.dropdown-item:hover {
+  background: #f16529;
+  color: #fff;
+  transition: 0.5s;
+  border-radius: 15px;
+}
+
+.card-dash-items-row {
+  background-color: #fff;
+  width: 100%;
+  height: 300px;
+  border-radius: 15px;
+  margin-bottom: 55px;
+}
+
+.container-dash-items-row {
+  margin-top: 55px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #f16529; /* Cambia 'red' al color que desees */
+}
