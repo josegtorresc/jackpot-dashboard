@@ -3,6 +3,10 @@ a {
   text-decoration: none !important;
 }
 
+body{
+  font-family: 'Poppins', sans-serif !important;
+}
+
 a:hover {
   color: #fff !important;
 }
@@ -149,6 +153,23 @@ a:hover {
   height: 300px;
   border-radius: 15px;
   margin-bottom: 55px;
+  padding:45px;
+  transition: .5s;
+}
+
+.card-dash-items-row:hover{
+  transition: .5s;
+  cursor:pointer;
+  transform: scale(.9);
+}
+
+.card-dash-item-inside{
+  padding: 30px;
+  background-color: #ebebeb;
+  width: 100%;
+  height:100%;
+  border-radius:15px;
+  position: relative;
 }
 
 .container-dash-items-row {
@@ -158,4 +179,43 @@ a:hover {
 
 .slick-dots li.slick-active button:before {
   color: #f16529; /* Cambia 'red' al color que desees */
+}
+
+.title-card-item-inside{
+  font-size: 29px;
+  opacity:.9;
+}
+
+.text-card-item-inside{
+  margin-top:15px;
+  opacity:.5;
+}
+
+.container-trigger-amount-card-inside{
+  margin-top: 45px;
+}
+
+.title-trigger-amount-card-inside{
+  font-size: 25px;
+}
+
+.span-trigger-log{
+  color:#f16529;
+  font-weight: bold;
+}
+
+.container-btn-card-inside{
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+}
+
+.btn-card-inside{
+  padding: 9px 45px;
+  font-size: 14px;
+  color:#fff;
+  background: linear-gradient(to right, #e44d26, #f16529);
+  border: 1px solid #fff;
+  transition: 0.5s;
+  border-radius: 15px;
 }
