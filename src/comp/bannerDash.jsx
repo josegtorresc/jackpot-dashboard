@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import '../styles/dashboard.css';
 
 function BannerDash({ title }) {
   return (
-    <div>
+    <Fragment>
       <div className="container container-canvas-dashboard-web">
         <div className="banner-dash">
           <h1 className="title-banner-container-text">{title}</h1>
@@ -15,7 +15,7 @@ function BannerDash({ title }) {
           </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 

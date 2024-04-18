@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import '../styles/dashboard.css';
 import TabDash from '../comp/tabDash';
@@ -19,7 +19,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div>
+    <Fragment>
       <motion.div
         transition={{
           duration: 0.3,
@@ -47,7 +47,7 @@ function Dashboard() {
           </div>
         </div>
       </motion.div>
-    </div>
+    </Fragment>
   );
 }
 

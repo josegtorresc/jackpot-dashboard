@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from '../comp/login';
-import Dashboard from '../pages/dashboard';
-import JackpotsComp from '../comp/jackpotsComp'; // Importa JackpotsComp
+import Login from './login.jsx';
+import Dashboard from '../pages/dashboard.jsx';
+import JackpotsComp from './jackpotsComp.jsx'; // Importa JackpotsComp
 
 function RoutesApp() {
   return (

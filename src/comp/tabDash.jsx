@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import '../styles/tabDash.css';
 import { NavLink } from 'react-router-dom';
 
 function TabDash() {
   return (
-    <div>
+    <Fragment>
       <div className="conatiner-tab-dash">
         <div className="container-title-top-dash">
           <h1 className="title-top-dash">Dashboard</h1>
@@ -33,7 +33,7 @@ function TabDash() {
           <button className="btn-out-tab">Cerrar Sesión</button>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 

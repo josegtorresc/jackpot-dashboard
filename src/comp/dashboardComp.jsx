@@ -1,5 +1,5 @@
-import React from 'react';
-import BannerDash from '../comp/bannerDash';
+import React, { Fragment } from 'react';
+import BannerDash from './bannerDash';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -16,7 +16,7 @@ function DashboardComp() {
   };
 
   return (
-    <div>
+    <Fragment>
       <motion.div
         transition={{
           duration: 0.3,
@@ -88,7 +88,7 @@ function DashboardComp() {
           </div>
         </div>
       </motion.div>
-    </div>
+    </Fragment>
   );
 }
 

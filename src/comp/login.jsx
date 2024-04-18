@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import '../styles/login.css';
 import { motion } from 'framer-motion';
-import Banner from '../comp/banner';
+import Banner from './banner';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -20,7 +20,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <Fragment>
       <div className="login-container-dashboard">
         <motion.div
           transition={{
@@ -72,7 +72,7 @@ function Login() {
           </div>
         </motion.div>
       </div>
-    </div>
+    </Fragment>
   );
 }
 

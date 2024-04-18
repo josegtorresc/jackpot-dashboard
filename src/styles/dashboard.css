@@ -153,6 +153,7 @@ a:hover {
 
 .container-dash-items-row {
   margin-top: 55px;
+  max-width: 96%;
 }
 
 .slick-dots li.slick-active button:before {
