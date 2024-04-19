@@ -6,29 +6,36 @@ function TabDash() {
   return (
     <Fragment>
       <div className="conatiner-tab-dash">
-        <div className="container-title-top-dash">
-          <h1 className="title-top-dash">Dashboard</h1>
-        </div>
-        <div className="item-tab-dash-options">
-          <NavLink to="jackpots" activeClassName="selected">
+        <NavLink to="/dashboard" activeClassName="selected">
+          <div className="container-title-top-dash">
+            <h1 className="title-top-dash">Dashboard</h1>
+          </div>
+        </NavLink>
+
+        <NavLink to="/dashboard/jackpots" activeClassName="selected">
+          <div className="item-tab-dash-options">
             <h1 className="text-tab-dash-options">Jackpots</h1>
-          </NavLink>
-        </div>
-        <div className="item-tab-dash-options">
-          <NavLink to="players" activeClassName="selected">
+          </div>
+        </NavLink>
+
+        <NavLink to="/dashboard/players" activeClassName="selected">
+          <div className="item-tab-dash-options">
             <h1 className="text-tab-dash-options">Players</h1>
-          </NavLink>
-        </div>
-        <div className="item-tab-dash-options">
-          <NavLink to="estadisticas" activeClassName="selected">
+          </div>
+        </NavLink>
+
+        <NavLink to="/dashboard/estadisticas" activeClassName="selected">
+          <div className="item-tab-dash-options">
             <h1 className="text-tab-dash-options">Estadisticas</h1>
-          </NavLink>
-        </div>
-        <div className="item-tab-dash-options">
-          <NavLink to="configuracion" activeClassName="selected">
+          </div>
+        </NavLink>
+
+        <NavLink to="/dashboard/configuracion" activeClassName="selected">
+          <div className="item-tab-dash-options">
             <h1 className="text-tab-dash-options">Config</h1>
-          </NavLink>
-        </div>
+          </div>
+        </NavLink>
+
         <div className="container-btn-out-tab">
           <button className="btn-out-tab">Cerrar Sesión</button>
         </div>

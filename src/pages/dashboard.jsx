@@ -8,6 +8,9 @@ import DashboardComp from '../comp/dashboardComp';
 import JackpotsComp from '../comp/jackpotsComp';
 import FlashMessage from '../comp/flashMessage';
 import myAudio from '../audios/alert.mp3';
+import PlayersComp from '../comp/playersComp';
+import EstComp from '../comp/estComp';
+import ConfigComp from '../comp/configComp';
 
 function Dashboard() {
   useEffect(() => {
@@ -42,6 +45,9 @@ function Dashboard() {
               <Routes>
                 <Route path="/" element={<DashboardComp />} />
                 <Route path="jackpots" element={<JackpotsComp />} />
+                <Route path="players" element={<PlayersComp />} />
+                <Route path="estadisticas" element={<EstComp />} />
+                <Route path="configuracion" element={<ConfigComp />} />
               </Routes>
             </div>
           </div>

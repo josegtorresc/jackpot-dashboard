@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { motion } from 'framer-motion';
+import BannerDash2 from './bannerDash2';
 
 function DashboardComp() {
   const settings = {
@@ -70,7 +71,7 @@ function DashboardComp() {
             <BannerDash title="Bienvenido a tu dashboard!" />
           </div>
           <div>
-            <BannerDash title="Mantén un orden" />
+            <BannerDash2 title="Mantén un orden" />
           </div>
         </Slider>
 
@@ -78,32 +79,75 @@ function DashboardComp() {
           <div className="row">
             <div className="col-md-6 col-xl-6 col-lg-6">
               <div className="card-dash-items-row">
-                <div className='card-dash-item-inside'>
-                  <h1 className='title-card-item-inside'>Administrar Jackpot</h1>
-                  <h5 className='text-card-item-inside'>Puedes hacer diversas config</h5>
-                  <div className='container-trigger-amount-card-inside'>
-                    <h1 className='title-trigger-amount-card-inside'><span className='span-trigger-log'>Trigger:</span> $1250</h1>
+                <div className="card-dash-item-inside">
+                  <h1 className="title-card-item-inside">
+                    Administrar Jackpots
+                  </h1>
+                  <h5 className="text-card-item-inside">
+                    Puedes hacer diversas config
+                  </h5>
+                  <div className="container-trigger-amount-card-inside">
+                    <h1 className="title-trigger-amount-card-inside">
+                      <span className="span-trigger-log">Trigger:</span> $1250
+                    </h1>
                   </div>
-                  <div className='container-btn-card-inside'>
-                    <button className='btn-card-inside'>Administar</button>
+                  <div className="container-btn-card-inside">
+                    <button className="btn-card-inside">Administar</button>
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-md-6 col-xl-6 col-lg-6">
               <div className="card-dash-items-row">
-              <div className='card-dash-item-inside'>
-                  <h1 className='title-card-item-inside'>Administrar Players</h1>
-                  <h5 className='text-card-item-inside'>Realiza config avanzadas a <br />cada usuario y administra <br /> los perfiles</h5>
-                  
-                  <div className='container-btn-card-inside'>
-                    <button className='btn-card-inside'>Administar</button>
+                <div className="card-dash-item-inside">
+                  <h1 className="title-card-item-inside">
+                    Administrar Players
+                  </h1>
+                  <h5 className="text-card-item-inside">
+                    Realiza config avanzadas a <br />
+                    cada usuario y administra <br /> los perfiles
+                  </h5>
+
+                  <div className="container-btn-card-inside">
+                    <button className="btn-card-inside">Administar</button>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-12 col-xl-12 col-lg-12">
-              <div className="card-dash-items-row"></div>
+            <div className="col-md-6 col-xl-6 col-lg-6">
+              <div className="card-dash-items-row">
+                <div className="card-dash-item-inside">
+                  <h1 className="title-card-item-inside">
+                    Ver estadísticas de los jackpots
+                  </h1>
+                  <h5 className="text-card-item-inside">
+                    Visualiza datos en tiempo <br />
+                    real de como se comporta <br /> el jackpot
+                  </h5>
+
+                  <div className="container-btn-card-inside">
+                    <button className="btn-card-inside">Visualizar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-6 col-xl-6 col-lg-6">
+              <div className="card-dash-items-row">
+                <div className="card-dash-item-inside">
+                  <h1 className="title-card-item-inside">
+                    Realizar configuraciones
+                  </h1>
+                  <h5 className="text-card-item-inside">
+                    Realiza configuraciones <br />
+                    generales de la lógica <br /> del jackpot
+                  </h5>
+
+                  <div className="container-btn-card-inside">
+                    <button className="btn-card-inside">Configurar</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
