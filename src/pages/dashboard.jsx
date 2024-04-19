@@ -38,10 +38,10 @@ function Dashboard() {
 
         <div className="container container-general-dash">
           <div className="row">
-            <div className="col-md-2 col-lg-2 col-xl-2">
+            <div className="col-md-3 col-lg-3 col-xl-2">
               <TabDash />
             </div>
-            <div className="col-md-10 col-lg-10 col-xl-10 canvas-dashboard-web">
+            <div className="col-md-9 col-lg-9 col-xl-10 canvas-dashboard-web">
               <Routes>
                 <Route path="/" element={<DashboardComp />} />
                 <Route path="jackpots" element={<JackpotsComp />} />

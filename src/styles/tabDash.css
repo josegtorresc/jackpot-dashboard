@@ -19,8 +19,9 @@
 }
 
 .item-tab-dash-options {
+  position: relative;
   background-color: #f0f0f0;
-  padding: 15px;
+  padding: 17.5px;
   border-radius: 15px;
   transition: 0.5s;
   margin-bottom: 35px;
@@ -63,4 +64,8 @@
 .btn-out-tab:hover {
   transform: scale(0.9);
   transition: 0.4s;
+}
+
+.span-tab-dash{
+  top:0 !important;
 }

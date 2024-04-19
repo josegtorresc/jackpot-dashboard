@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { motion } from 'framer-motion';
 import BannerDash2 from './bannerDash2';
+import CompDash from './compDash';
 
 function DashboardComp() {
   const settings = {
@@ -14,7 +15,12 @@ function DashboardComp() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: 1500,
-  };
+  }; 
+
+    const textoJackpot = "Administra cada item <br /> de cada jackpot con clicks <br /> sencillos";
+    const textoPlayer = "Administra cada jugador,<br /> accede a sus datos y <br /> estadísticas";
+    const textoEst = "Accede a las estadisticas <br /> de los jackpots y estate <br /> actualizado";
+    const textoConfig = "Configura las condiciones <br /> de los jackpots y establece <br />un orden";
 
   return (
     <Fragment>
@@ -30,8 +36,9 @@ function DashboardComp() {
       >
         <div className="container-title-top-dash-general">
           <h1 className="title-top-dash-general">
-            Dashboard - PrometeoIT Solutions
+            Dashboard  <span className='span-title-dash-view-mobile'>- PrometeoIT Solutions</span>
           </h1>
+          <span></span>
           <div className="dropdown dropdown-dash">
             <button
               className="btn btn-secondary dropdown-toggle"
@@ -59,12 +66,27 @@ function DashboardComp() {
               </li>
               <li>
                 <a className="dropdown-item" href="#">
-                  Configuración
+                  Configuración del jackpot
                 </a>
               </li>
             </ul>
           </div>
           <h1 className="title-top-dash-hour">14:23:00 PM</h1>
+          <div className='container-section-nav-items'>
+            <div className='container-img--items'>
+            <img className='img--items' src={require("../images/search.png")} alt="" />
+            <span className='item-img-span'></span>
+            </div>
+            <div className='container-img--items'>
+            <img className='img--items' src={require("../images/not.png")} alt="" />
+            <span className='item-img-span'></span>
+            </div>
+          </div>
+
+          <div className='button-top-nav'>
+            <button className='btn-nav-header btn-nav-header-span'>Actualización - 10min</button>
+          </div>
+
         </div>
         <Slider {...settings}>
           <div>
@@ -73,80 +95,46 @@ function DashboardComp() {
           <div>
             <BannerDash2 title="Mantén un orden" />
           </div>
-        </Slider>
+        </Slider>  
+
+        
+        <div className='container container-title-dash-box'>
+          <h1 className='title-dash-box'><span className='span-title-dash-view-mobile'>Administra</span> Tus secciones</h1>
+          <div className='button-top-nav'>
+            <button className='btn-nav-header'>Actualización - 10min</button>
+          </div>
+          <div className='container-search-dash-box'>
+            <input className='input-search-dash-box' type="text" placeholder='Buscar secciones, elementos y configurar'/>
+            <div className='container-row-img--items'>
+            <img className='img--items img-span-row-search' src={require("../images/search.png")} />
+            <span className='item-img-span span-row-search'></span>
+            </div>
+          </div>
+        </div>
+
+    
 
         <div className="container container-dash-items-row">
           <div className="row">
-            <div className="col-md-6 col-xl-6 col-lg-6">
+            <div className="col-md-12 col-xl-6 col-lg-12">
               <div className="card-dash-items-row">
-                <div className="card-dash-item-inside">
-                  <h1 className="title-card-item-inside">
-                    Administrar Jackpots
-                  </h1>
-                  <h5 className="text-card-item-inside">
-                    Puedes hacer diversas config
-                  </h5>
-                  <div className="container-trigger-amount-card-inside">
-                    <h1 className="title-trigger-amount-card-inside">
-                      <span className="span-trigger-log">Trigger:</span> $1250
-                    </h1>
-                  </div>
-                  <div className="container-btn-card-inside">
-                    <button className="btn-card-inside">Administar</button>
-                  </div>
-                </div>
+                <CompDash title="Administra los jackpots" text={textoJackpot} textBtn="Administar" img={require("../images/mon.png")}/>
               </div>
             </div>
-            <div className="col-md-6 col-xl-6 col-lg-6">
+            <div className="col-md-12 col-xl-6 col-lg-12">
               <div className="card-dash-items-row">
-                <div className="card-dash-item-inside">
-                  <h1 className="title-card-item-inside">
-                    Administrar Players
-                  </h1>
-                  <h5 className="text-card-item-inside">
-                    Realiza config avanzadas a <br />
-                    cada usuario y administra <br /> los perfiles
-                  </h5>
-
-                  <div className="container-btn-card-inside">
-                    <button className="btn-card-inside">Administar</button>
-                  </div>
-                </div>
+              <CompDash title="Administra los Players" text={textoPlayer} textBtn="Administar" img={require("../images/user.png")}/>
               </div>
             </div>
-            <div className="col-md-6 col-xl-6 col-lg-6">
+            <div className="col-md-12 col-xl-6 col-lg-12">
               <div className="card-dash-items-row">
-                <div className="card-dash-item-inside">
-                  <h1 className="title-card-item-inside">
-                    Ver estadísticas de los jackpots
-                  </h1>
-                  <h5 className="text-card-item-inside">
-                    Visualiza datos en tiempo <br />
-                    real de como se comporta <br /> el jackpot
-                  </h5>
-
-                  <div className="container-btn-card-inside">
-                    <button className="btn-card-inside">Visualizar</button>
-                  </div>
-                </div>
+              <CompDash title="Ve las estadísticas" text={textoEst} textBtn="Visualizar" img={require("../images/graf.png")}/>
               </div>
             </div>
 
-            <div className="col-md-6 col-xl-6 col-lg-6">
+            <div className="col-md-12 col-xl-6 col-lg-12">
               <div className="card-dash-items-row">
-                <div className="card-dash-item-inside">
-                  <h1 className="title-card-item-inside">
-                    Realizar configuraciones
-                  </h1>
-                  <h5 className="text-card-item-inside">
-                    Realiza configuraciones <br />
-                    generales de la lógica <br /> del jackpot
-                  </h5>
-
-                  <div className="container-btn-card-inside">
-                    <button className="btn-card-inside">Configurar</button>
-                  </div>
-                </div>
+              <CompDash title="Configura los jackpots" text={textoConfig} textBtn="Configurar" img={require("../images/conf.png")}/>
               </div>
             </div>
           </div>
