@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { motion } from 'framer-motion';
 import BannerDash2 from './bannerDash2';
 import CompDash from './compDash';
+import { Link } from 'react-router-dom';
 
 function DashboardComp() {
   const settings = {
@@ -118,7 +119,9 @@ function DashboardComp() {
           <div className="row">
             <div className="col-md-12 col-xl-6 col-lg-12">
               <div className="card-dash-items-row">
+                <Link to="jackpots">
                 <CompDash title="Administra los jackpots" text={textoJackpot} textBtn="Administar" img={require("../images/mon.png")}/>
+                </Link>
               </div>
             </div>
             <div className="col-md-12 col-xl-6 col-lg-12">

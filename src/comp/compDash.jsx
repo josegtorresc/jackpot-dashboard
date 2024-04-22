@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import '../styles/compDash.css';
 
-function CompDash({title, text, img, textBtn}) {
+function CompDash({title, text, img, textBtn, click}) {
     return (
     <Fragment>
             <div className="card-dash-item-inside">
@@ -14,7 +14,7 @@ function CompDash({title, text, img, textBtn}) {
                     <img className='img-span-card-inside' src={img} />
                   </div>
                   <div className="container-btn-card-inside">
-                    <button className="btn-card-inside"> {textBtn}</button>
+                    <button className="btn-card-inside" onClick={click}> {textBtn}</button>
                   </div>
                 </div>
     </Fragment>
