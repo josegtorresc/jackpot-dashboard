@@ -3,10 +3,10 @@ a {
   text-decoration: none !important;
 }
 
-button:focus{
-outline: none !important;
-transform: scale(.95);
-transition: .2s;
+button:focus {
+  outline: none !important;
+  transform: scale(0.95);
+  transition: 0.2s;
 }
 
 body {
@@ -153,19 +153,23 @@ body {
   border-radius: 15px;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   animation: fadeIn 0.2s ease-in-out;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .dropdown-menu.show {
   animation: fadeIn 0.2s ease-in-out;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .card-dash-items-row {
@@ -242,13 +246,13 @@ body {
   border-radius: 15px;
 }
 
-.btn-card-inside:hover{
+.btn-card-inside:hover {
   background: #fff;
-  color:#f16529;
-  transition: .2s;
+  color: #f16529;
+  transition: 0.2s;
 }
 
-.container-section-nav-items{
+.container-section-nav-items {
   margin-top: 10px;
   margin-right: 25px;
   float: right;
@@ -256,19 +260,19 @@ body {
   gap: 15px;
 }
 
-.container-img--items{
+.container-img--items {
   position: relative;
   display: inline-block;
 }
 
-.img--items{
+.img--items {
   width: 25px;
   margin-left: 20px;
-  opacity: .7;
+  opacity: 0.7;
 }
 
-.item-img-span{
-  position:absolute;
+.item-img-span {
+  position: absolute;
   width: 12px;
   height: 12px;
   border-radius: 100px;
@@ -276,52 +280,50 @@ body {
   right: -5px;
 }
 
-.button-top-nav{
+.button-top-nav {
   display: inline-block;
-  margin-left:15px;
+  margin-left: 15px;
 }
 
-.btn-nav-header{
+.btn-nav-header {
   border: 1px solid #f16529;
-  padding:12px 45px;
+  padding: 12px 45px;
   border-radius: 15px;
   background-color: #fff;
-  transition: .2s;
+  transition: 0.2s;
 }
 
-.btn-nav-header:hover{
+.btn-nav-header:hover {
   background: #f16529;
-  color:#fff;
+  color: #fff;
 }
 
-.container-title-dash-box{
+.container-title-dash-box {
   margin-top: 50px;
   max-width: 96%;
 }
 
-.title-dash-box{
-   display: inline-block;
-    font-size: 30px;
-    font-weight: bold;
-    opacity: 0.88;
+.title-dash-box {
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+  opacity: 0.88;
 }
 
-
-.container-search-dash-box{
-  display:flex;
+.container-search-dash-box {
+  display: flex;
   float: right;
 }
 
-.input-search-dash-box{
+.input-search-dash-box {
   background: #fff;
   border-radius: 100px;
-  border:none;
+  border: none;
   padding: 12px 45px;
-  transition: .2s;
+  transition: 0.2s;
 }
 
-
-.container-row-img--items{
+.container-row-img--items {
   position: relative;
   display: flex;
   justify-content: center;
@@ -333,84 +335,254 @@ body {
   margin-left: 20px;
 }
 
-.img-span-row-search{
+.img-span-row-search {
   margin-left: 0 !important;
-  opacity: .5 !important;
+  opacity: 0.5 !important;
 }
 
-.span-row-search{
+.span-row-search {
   top: 0px !important;
-  right:1px;
+  right: 1px;
+}
+
+.container-mobile-viewport-app {
+  display: none;
+}
+
+.container-web-viewport {
+  display: block;
+}
+
+.container-mobile-viewport-app {
+  padding-top: 90px;
+  padding-bottom: 85px;
+}
+
+.title-top {
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+.container-items-row-dash-mobile-routes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 27px;
+  background: #fff;
+  border-radius: 15px;
+}
+
+.title-route-row {
+  font-size: 17px;
+  padding: 15px;
+  margin-bottom: 0;
+}
+
+.span-selected {
+  background-color: #f16529;
+  border-radius: 15px;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.container-title-top-mobile {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.container-span-items-row-not {
+  position: absolute;
+  right: 0;
+  margin-top: -10px;
+}
+
+.slick-initialized .slick-slide {
+  padding-right: 2.5px !important;
+  padding-left: 2.5px;
+}
+
+.slick-dots {
+  bottom: -36px !important;
+}
+
+.slick-prev,
+.slick-next {
+  display: none !important;
+}
+
+.slick-slider {
+  overflow: hidden;
+  visibility: visible !important;
+}
+
+.container-row-items-sections {
+  margin-top: 20px;
+}
+
+.card-text-sections {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 25px;
+  height: 200px;
+  border-radius: 15px;
+}
+
+.card-inside-sections {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: #f5f5f5;
+  position: relative;
+}
+
+.container-mobile-viewport-app {
+  background: #f5f5f5;
+}
+
+.card-inside-sections {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title-card-section-inside {
+  font-size: 25px;
+  opacity: 0.95;
+}
+
+.text-card-section-inside {
+  opacity: 0.73;
+}
+
+.img-card-section-inside {
+  width: 80px;
+  border: 1.6px solid #f16529;
+  border-radius: 100px;
+  padding: 15px;
+}
+
+.btn-card-inside-section {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px 25px;
+  border: none;
+  background: linear-gradient(to right, #e44d26, #f16529);
+  color: #fff;
+  border-radius: 15px;
+}
+
+.span-card-aside-inside-section {
+  top: 0 !important;
+  width: 15.5px;
+  height: 15.5px;
 }
 
 @media screen and (min-width: 0px) and (max-width: 1340px) {
- .btn-nav-header{
-  display: none;
- }
- .slick-list{
-  overflow: visible !important;
- }
- .title-top-dash-hour{
-  display: none;
- }
-}
-
-
-@media screen and (min-width: 1200px) and (max-width: 1650px) {
-  .btn-nav-header-span{
-   display: none;
-  }
-  .slick-list{
-   overflow: visible !important;
-  }
-  .title-top-dash-hour{
-   display: none;
-  }
-  .title-card-item-inside{
-    font-size: 23px;
-  }
- }
-
- @media screen and (min-width: 1200px) and (max-width: 1400px) {
-  .title-card-item-inside{
-    font-size: 20px;
-  }
-  .text-card-item-inside{
-    font-size: 18px;
-  }
-  .container-img-span-card-inside{
-    right: 30px !important;
-  }
- }
-
-
- @media screen and (min-width: 1600px) {
-  .input-search-dash-box{
-    padding: 12px 160px;
-  }
- }
-
-
- @media screen and (min-width: 773px) and (max-width: 1160px) {
-  .span-title-dash-view-mobile{
+  .btn-nav-header {
     display: none;
   }
- }
+  .slick-list {
+    overflow: visible !important;
+  }
+  .title-top-dash-hour {
+    display: none;
+  }
+}
 
- @media screen and (min-width: 768px) and (max-width: 1100px) {
-  .title-banner-container-text{
+@media screen and (min-width: 1200px) and (max-width: 1650px) {
+  .btn-nav-header-span {
+    display: none;
+  }
+  .slick-list {
+    overflow: visible !important;
+  }
+  .title-top-dash-hour {
+    display: none;
+  }
+  .title-card-item-inside {
+    font-size: 23px;
+  }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .title-card-item-inside {
+    font-size: 20px;
+  }
+  .text-card-item-inside {
+    font-size: 18px;
+  }
+  .container-img-span-card-inside {
+    right: 30px !important;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .input-search-dash-box {
+    padding: 12px 160px;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1200px) {
+  .span-title-dash-view-mobile {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1100px) {
+  .title-banner-container-text {
     font-size: 28px;
   }
-  .title-banner-span-copy{
+  .title-banner-span-copy {
     font-size: 100px;
     bottom: -40px;
     left: 3%;
   }
-  .title-card-item-inside{
+  .title-card-item-inside {
     font-size: 20px;
   }
-  .text-card-item-inside{
+  .text-card-item-inside {
     font-size: 18px;
   }
- }
+}
 
+@media screen and (min-width: 0px) and (max-width: 768px) {
+  .container-mobile-viewport-app {
+    display: block !important;
+  }
+
+  .container-web-viewport {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 380px) {
+  .span-item-row-balance-sections {
+    display: none;
+  }
+  .text-card-section-inside {
+    font-size: 15px;
+  }
+  .img-card-section-inside {
+    width: 73px;
+  }
+  .title-banner-mobile {
+    font-size: 19.4px !important;
+  }
+  .span-text-banner-date {
+    width: 80px;
+    height: 80px;
+  }
+  .title-item-banner {
+    font-size: 19.4px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 861px) {
+  .title-top-dash-general {
+    font-size: 21px;
+  }
+  .title-dash-box {
+    font-size: 20px;
+  }
+}

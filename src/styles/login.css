@@ -1,10 +1,16 @@
 body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow-y: none !important;
+}
+
+.login-container-dashboard {
+  overflow-y: hidden !important;
+  position: relative;
 }
 
 .input-wel {
-  width: 92% !important;
+  width: 100% !important;
   margin-bottom: 30px;
   padding: 20px 40px;
   border: none;
@@ -32,7 +38,7 @@ input:focus {
 
 @media only screen and (max-width: 1060px) {
   .btn-welcome {
-    width: 100%;
+    width: 120% !important;
   }
 }
 
@@ -55,8 +61,8 @@ body {
 }
 
 .item {
-  flex: 1; /* Distribuir espacio de manera equitativa */
-  display: flex;
+  flex: 1;
+  display: inline-flex; /* Cambiado a inline-flex para ajustarse al contenido */
   align-items: center; /* Centrar contenido horizontalmente */
   justify-content: center; /* Centrar contenido verticalmente */
 }
@@ -158,16 +164,4 @@ input[type='password']:focus {
 
 input {
   transition: 0.5s !important;
-}
-
-@media only screen and (max-width: 1060px) {
-  .container-mobile-welcome {
-    display: flex !important;
-  }
-  .container-web {
-    display: none;
-  }
-  .container-mobile {
-    display: block !important;
-  }
 }

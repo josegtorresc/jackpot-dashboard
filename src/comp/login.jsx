@@ -59,6 +59,14 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+
+              <input
+                className="input-wel"
+                placeholder="Vuelva a ingresar la contraseña"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <div className="item">
               <button

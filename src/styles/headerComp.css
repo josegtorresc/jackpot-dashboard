@@ -1,0 +1,34 @@
+.header-mobile-viewport {
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: #fff;
+  width: 100%;
+  height: 57px;
+  box-shadow: 1px 1px 15px 1px rgba(17, 23, 21, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+  z-index: 10000;
+}
+
+.logo-app {
+  font-size: 18px;
+  color: #f16529;
+  margin-bottom: 0px;
+}
+
+.btn-close-sescion {
+  background: linear-gradient(to right, #e44d26, #f16529);
+  color: #fff;
+  padding: 10px;
+  border-radius: 15px;
+  border: none;
+}
+
+@media screen and (min-width: 769px) {
+  .header-mobile-viewport {
+    display: none !important;
+  }
+}

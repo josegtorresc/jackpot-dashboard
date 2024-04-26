@@ -10,7 +10,8 @@
 }
 
 .selected {
-  background-color: #f16529 !important;
+  background: #f16529 !important;
+  color: #fff;
 }
 
 .text-tab-dash-options {
@@ -20,7 +21,7 @@
 
 .item-tab-dash-options {
   position: relative;
-  background-color: #f5f5f5 ;
+  background-color: #f5f5f5;
   padding: 17.5px;
   border-radius: 15px;
   transition: 0.5s;
@@ -66,6 +67,6 @@
   transition: 0.4s;
 }
 
-.span-tab-dash{
-  top:0 !important;
+.span-tab-dash {
+  top: 0 !important;
 }

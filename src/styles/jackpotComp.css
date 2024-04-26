@@ -1,48 +1,81 @@
-.container-items-popup-detail{
-    top: 0;
-    left: 0;
-    position: fixed;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background: rgba(17,23,21,.8);
-    z-index: 10000;
-    transition: .2s;
-    overflow: hidden;
-    transition: .2s;
+.container-items-popup-detail-show {
+  top: 0;
+  left: 0;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: rgba(17, 23, 21, 0.8);
+  z-index: 10000;
+  display: flex;
+  opacity: 1;
+  transition: 0.2s !important;
+  visibility: visible;
+  transform: scale(1);
 }
 
-.container-items-popup-detail-show{
-    top: 0;
-    left: 0;
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    background: rgba(17,23,21,.8);
-    z-index: 10000;
-    transition: .2s;
-    overflow: hidden;
-    display: flex;
-    opacity: 1;
-    overflow: visible;
-    transition: .2s;
+.container-items-popup-detail {
+  transform: scale(0.98);
+  visibility: hidden !important;
+  transition: 0.5s;
+  opacity: 0;
+}
+.card-popup-detail {
+  width: 600px;
+  height: 550px;
+  background: #fff;
+  border-radius: 15px;
+  padding: 65px;
+  position: relative;
 }
 
-.card-popup-detail{
-width: 600px;
-height: 600px;
-background: #fff;
-border-radius: 15px;
-padding:65px;
+.title-card-trigger {
+  font-weight: 600;
+  font-size: 28px;
+  text-align: center;
 }
 
-.title-card-trigger{
-    font-size: 32px;
-    text-align: center;
-    font-weight: 600;
-    opacity:.9;
+.row-jackpot-value {
+  margin-top: 45px;
+  justify-content: space-around;
+  display: flex;
+  width: 100%;
+}
+
+.title-jackpot-row-value {
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.input-row-value-jackpot {
+  padding: 12px 25px;
+  text-align: center;
+  border-radius: 100px;
+  border: 1px solid #f16529;
+}
+
+.btn-row-jackpot-actualization-value {
+  padding: 12px 45px;
+  background: linear-gradient(to right, #e44d26, #f16529);
+  border-radius: 15px;
+  border: none;
+  color: #fff;
+  transition: 0.4s;
+}
+
+.btn-row-jackpot-actualization-value:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #f16529;
+  transition: 0.4s;
+}
+
+.img-close-popup-deatil {
+  cursor: pointer;
+  position: absolute;
+  opacity: 0.7;
+  width: 30px;
+  right: 30px;
+  top: 30px;
 }

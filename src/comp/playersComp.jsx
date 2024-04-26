@@ -4,8 +4,12 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { motion } from 'framer-motion';
+import CompDash from './compDash';
+import { Link } from 'react-router-dom';
+import DropComp from './dropComp';
+import NotComp from './notComp';
 
-function PlayersComp() {
+function PlayersComp({ formattedDate }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -14,6 +18,11 @@ function PlayersComp() {
     slidesToScroll: 1,
     autoplay: 1500,
   };
+
+  const textoPlayer =
+    'Administra a cada uno de <br /> los jugadores con clicks <br /> sencillos';
+  const textoPlayerEst =
+    'Accede a cada usuario <br /> y podrás ver sus<br /> estaditicas';
 
   return (
     <Fragment>
@@ -29,56 +38,52 @@ function PlayersComp() {
       >
         <div className="container-title-top-dash-general">
           <h1 className="title-top-dash-general">
-            Dashboard - PrometeoIT Solutions
+            Dashboard -{' '}
+            <span className="span-title-dash-view-mobile">
+              {' '}
+              PrometeoIT Solutions
+            </span>
           </h1>
-          <div className="dropdown dropdown-dash">
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Secciones del dash
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
-            </ul>
-          </div>
+          <DropComp />
           <h1 className="title-top-dash-hour">14:23:00 PM</h1>
+          <NotComp />
         </div>
 
         <Slider {...settings}>
           <div>
-            <BannerDash title="Administra los jackpots" />
+            <BannerDash
+              title="Administra los Players"
+              formattedDate={formattedDate}
+            />
           </div>
           <div>
-            <BannerDash title="Ve las estadísticas" />
+            <BannerDash
+              title="Ve sus estadísticas"
+              formattedDate={formattedDate}
+            />
           </div>
         </Slider>
         <div className="container container-dash-items-row">
           <div className="row">
-            <div className="col-md-6 col-xl-6 col-lg-6">
-              <div className="card-dash-items-row"></div>
+            <div className="col-md-12 col-xl-6 col-lg-12">
+              <div className="card-dash-items-row">
+                <CompDash
+                  title="Administra Players"
+                  text={textoPlayer}
+                  textBtn="Administrar"
+                  img={require('../images/user.png')}
+                />
+              </div>
             </div>
-            <div className="col-md-6 col-xl-6 col-lg-6">
-              <div className="card-dash-items-row"></div>
-            </div>
-            <div className="col-md-12 col-xl-12 col-lg-12">
-              <div className="card-dash-items-row"></div>
+            <div className="col-md-12 col-xl-6 col-lg-12">
+              <div className="card-dash-items-row">
+                <CompDash
+                  title="Accede a sus estadísticas"
+                  text={textoPlayerEst}
+                  textBtn="Acceder"
+                  img={require('../images/graf.png')}
+                />
+              </div>
             </div>
           </div>
         </div>
