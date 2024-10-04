@@ -1,16 +1,15 @@
 import React, { Fragment } from 'react';
 import '../styles/headerComp.css';
+import NotCompBackHeader from './notCompBackHeader';
 
 function HeaderComp() {
   return (
     <Fragment>
       <header className="header-mobile-viewport">
         <div>
-          <h1 className="logo-app">Promoteoit</h1>
+          <h1 className="logo-app">ADM - Prometeoit</h1>
         </div>
-        <div>
-          <button className="btn-close-sescion">Cerrar sesión</button>
-        </div>
+        <NotCompBackHeader />
       </header>
     </Fragment>
   );

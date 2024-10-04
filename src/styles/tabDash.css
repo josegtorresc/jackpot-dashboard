@@ -10,8 +10,9 @@
 }
 
 .selected {
+  border-radius: 15px;
   background: #f16529 !important;
-  color: #fff;
+  color: #fff !important;
 }
 
 .text-tab-dash-options {
@@ -39,7 +40,7 @@
 .title-top-dash {
   font-size: 25px;
   font-weight: bold;
-  opacity: 0.7;
+  color: #f16529;
 }
 
 .container-title-top-dash {

@@ -1,0 +1,35 @@
+.card-est-balance-row {
+  width: 100%;
+  background: #fff;
+  height: 150px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  transition: 0.4s;
+  margin-top: -20px;
+}
+
+.card-est-balance-row:hover {
+  cursor: pointer;
+  transform: scale(0.95);
+  transition: 0.4s;
+}
+
+.title-identify-card-est-balance-row {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.img-abm-jackpots {
+  width: 50px;
+}
+
+.text-valueid-card {
+  margin-bottom: 0px !important;
+}
+
+.balance-jackpot {
+  color: #f16529;
+  font-weight: bold;
+}

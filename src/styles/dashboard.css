@@ -11,6 +11,10 @@ button:focus {
 
 body {
   font-family: 'Poppins', sans-serif !important;
+  /**user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;**/
 }
 
 .container-general-dash {
@@ -75,7 +79,7 @@ body {
 .title-banner-span-copy {
   position: absolute;
   bottom: -100px;
-  left: 10%;
+  left: 5% !important;
   font-size: 170px;
   font-weight: bold;
   opacity: 0.14;
@@ -83,7 +87,7 @@ body {
 }
 
 .carousel-container {
-  width: 100% !important; /* O el ancho deseado */
+  width: 100% !important;
   overflow: hidden;
 }
 
@@ -106,18 +110,12 @@ body {
 }
 
 .btn-secondary {
-  color: #000;
-  background-color: #fff;
+  color: #fff;
+  background-color: #f16529;
   border-radius: 15px !important;
   padding: 11px 45px;
-  border: 1px solid #e44d26;
   transition: 0.5s;
-}
-
-.btn-secondary:hover {
-  background: linear-gradient(to right, #e44d26, #f16529);
-  border: 1px solid #fff;
-  transition: 0.5s;
+  border: none;
 }
 
 .title-top-dash-hour {
@@ -183,9 +181,12 @@ body {
 }
 
 .card-dash-items-row:hover {
-  transition: 0.5s;
+  transition: 0.2s;
   cursor: pointer;
-  transform: scale(0.96);
+}
+
+.card-dash-items-row:active {
+  transform: scale(0.92);
 }
 
 .card-dash-item-inside {
@@ -286,16 +287,17 @@ body {
 }
 
 .btn-nav-header {
-  border: 1px solid #f16529;
   padding: 12px 45px;
   border-radius: 15px;
-  background-color: #fff;
+  background-color: #f16529;
+  border: none;
+  color: #fff;
   transition: 0.2s;
 }
 
 .btn-nav-header:hover {
-  background: #f16529;
-  color: #fff;
+  transform: scale(0.99);
+  transition: 0.2s;
 }
 
 .container-title-dash-box {
@@ -356,6 +358,10 @@ body {
 .container-mobile-viewport-app {
   padding-top: 90px;
   padding-bottom: 85px;
+}
+
+.span-dash-mobile {
+  padding-top: 65px !important;
 }
 
 .title-top {
@@ -425,6 +431,12 @@ body {
   padding: 25px;
   height: 200px;
   border-radius: 15px;
+  transition: 0.2s;
+}
+
+.card-text-sections:active {
+  transform: scale(0.92);
+  transition: 0.2s;
 }
 
 .card-inside-sections {
@@ -455,8 +467,8 @@ body {
 }
 
 .img-card-section-inside {
-  width: 80px;
-  border: 1.6px solid #f16529;
+  width: 86.8px;
+  border: 2.56px solid #f16529;
   border-radius: 100px;
   padding: 15px;
 }
@@ -476,6 +488,43 @@ body {
   top: 0 !important;
   width: 15.5px;
   height: 15.5px;
+}
+
+.container-mobile-routes {
+  display: none !important;
+}
+
+.btn-deactivate-jackpot {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  border-radius: 15px;
+  padding: 11px 35px;
+  color: #fff;
+  background: red;
+  border: none !important;
+}
+
+.btn-activate-jackpot {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  border-radius: 15px;
+  padding: 11px 35px;
+  color: #fff;
+  background: green;
+  border: none !important;
+}
+
+.img-download-pdf-data-not {
+  position: absolute;
+  right: 27px;
+  top: 27px;
+  width: 30px;
+}
+
+.span-players{
+  margin-bottom: 50px;
 }
 
 @media screen and (min-width: 0px) and (max-width: 1340px) {
@@ -553,6 +602,15 @@ body {
 
   .container-web-viewport {
     display: none;
+  }
+  .container-mobile-routes {
+    display: block !important;
+  }
+  body {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
   }
 }
 

@@ -1,0 +1,37 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-header {
+  display: flex;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.item-section-row-header {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-section-row-complete {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  white-space: nowrap;
+}
+
+.item-section-row-data {
+  flex: 1;
+  text-align: center;
+  padding: 5px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap !important;
+  display: flex;
+  flex-wrap: nowrap;
+}

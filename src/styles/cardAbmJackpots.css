@@ -1,0 +1,31 @@
+.card-abm-jackpots {
+  width: 100%;
+  background: #fff;
+  height: 150px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  transition: 0.4s;
+  margin-top: -20px;
+}
+
+.card-abm-jackpots:hover {
+  cursor: pointer;
+  transform: scale(0.95);
+  transition: 0.4s;
+}
+
+.img-est-balance-row-card {
+  width: 60px;
+}
+
+.text-abm-jackpots {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.title-abm-jackpots {
+  font-size: 25px;
+  opacity: 0.9;
+}

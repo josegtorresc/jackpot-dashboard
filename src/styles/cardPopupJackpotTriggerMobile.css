@@ -1,0 +1,68 @@
+.container-popup-jackpot-mobile-show {
+  top: 0;
+  left: 0;
+  position: fixed;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  padding: 18px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(10px);
+  z-index: 100000;
+  display: flex;
+  opacity: 1;
+  transition: 0.2s !important;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.container-popup-jackpot-mobile {
+  transform: scale(0.98);
+  visibility: hidden !important;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.card-popup-jackpot-mobile {
+  width: 100%;
+  height: 78%;
+  padding: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 30px;
+  position: relative;
+  flex-direction: column;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.title-general-card-jackpot-mobile {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.input-jackpots-mobile {
+  width: 100%;
+  padding: 12px 25px;
+  text-align: center;
+  border-radius: 100px;
+  border: 1.5px solid #f16529;
+  margin-bottom: 40px;
+}
+
+.btn-jackpots-mobile-act {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  width: 82%;
+  padding: 13px 45px;
+  background: linear-gradient(to right, #e44d26, #f16529);
+  border-radius: 15px;
+  border: none;
+  color: #fff;
+  transition: 0.4s;
+}

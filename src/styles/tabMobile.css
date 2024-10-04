@@ -2,7 +2,7 @@
   height: 70px;
   background: #fff;
   position: fixed;
-  z-index: 15000;
+  z-index: 10000;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -32,13 +32,13 @@
 }
 
 .icon-bt-nav {
-  width: 30px;
+  width: 27.4px;
 }
 
-.nav {
-  display: block;
-  color: red !important;
+.active-icon {
+  color: #f16529;
   opacity: 1 !important;
+  font-weight: bolder;
 }
 
 .title-bt-nav-identifier {

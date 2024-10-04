@@ -1,0 +1,27 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-header {
+  display: flex;
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.item-section-row-header {
+  text-align: center;
+}
+
+.item-section-row-complete {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.item-section-row-data {
+  flex: 1;
+  text-align: center;
+  padding: 5px 0;
+}

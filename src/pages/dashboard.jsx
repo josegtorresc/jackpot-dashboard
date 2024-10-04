@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Routes, Route, useLocation, Link } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import '../styles/dashboard.css';
-import TabDash from '../comp/tabDash';
 import Banner from '../comp/banner';
 import { motion } from 'framer-motion';
 import DashboardComp from '../comp/dashboardComp';
@@ -12,26 +11,29 @@ import PlayersComp from '../comp/playersComp';
 import EstComp from '../comp/estComp';
 import ConfigComp from '../comp/configComp';
 import { useNavigate } from 'react-router-dom';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import HeaderComp from '../compsMobiles/headerComp';
-import TabMobile from '../compsMobiles/tabMobile';
-import NotComp from '../comp/notComp';
-import BannerDash from '../comp/bannerDash';
-import BannerDash2 from '../comp/bannerDash2';
-import BannerMobile from '../compsMobiles/bannerMobile';
-import CardDasMobile from '../compsMobiles/cardDasMobile';
+import DashboardMobile from './dashboardMobile';
+import JackpotsCompMobile from './jackpotsCompMobile';
+import PlayersCompMobile from './playersCompMobile';
+import ConfigCompMobile from './configCompMobile';
+import EstCompMobile from './estCompMobile';
+import AbmComp from '../comp/abmComp';
+import LoadingDetailTrans from '../compsMobiles/loaderDetailTrans';
+import AbmUsuarios from '../comp/abmUsuarios';
+import AbmMaquinas from '../comp/abmMaquinas';
+import AbmCasinos from '../comp/abmCasinos';
+import AbmGruposCasinos from '../comp/abmGruposCasinos';
+import AbmGruposMaquinas from '../comp/abmGruposMaquinas';
+import TabDashTry from '../comp/tabDashTry';
 
 function Dashboard() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 800, // Velocidad de transición en milisegundos
-    slidesToShow: 1, // Número de slides a mostrar a la vez
-    slidesToScroll: 1, // Número de slides a desplazar por vez
+    speed: 800,
+    slidesToShow: 1,
+    slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000, // Tiempo en milisegundos para cambiar de slide (10 segundos)
+    autoplaySpeed: 5000,
     pauseOnHover: true,
   };
 
@@ -61,8 +63,6 @@ function Dashboard() {
   const navigate = () => {
     navigation('/actividades');
   };
-
-  console.log(location);
 
   const [time, setTime] = useState(new Date());
 
@@ -107,120 +107,156 @@ function Dashboard() {
 
   return (
     <Fragment>
-      <motion.div
-        transition={{
-          duration: 0.3,
-          delay: 0.3,
-          ease: [0.5, 0.71, 1, 1.5],
-        }}
-        initial={{ opacity: 0 }}
-        exit={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <Banner title="Bienvenido a tu dashboard!" />
-        <FlashMessage title="Bienvenido a tu dashboard!" />
+      <Banner title="Bienvenido a tu dashboard!" />
+      <FlashMessage title="Bienvenido a tu dashboard!" />
+      <LoadingDetailTrans />
 
-        <div className="container-web-viewport">
-          <div className="container container-general-dash">
-            <div className="row">
-              <div className="col-md-3 col-lg-3 col-xl-2">
-                <TabDash selectedComponent={selectedComponent} />
-              </div>
-              <div className="col-md-9 col-lg-9 col-xl-10 canvas-dashboard-web">
-                <Routes>
-                  <Route
-                    path="/"
-                    element={<DashboardComp formattedDate={formattedDate} />}
-                  />
-                  <Route
-                    path="jackpots"
-                    element={<JackpotsComp formattedDate={formattedDate} />}
-                  />
-                  <Route
-                    path="players"
-                    element={<PlayersComp formattedDate={formattedDate} />}
-                  />
-                  <Route
-                    path="estadisticas"
-                    element={<EstComp formattedDate={formattedDate} />}
-                  />
-                  <Route
-                    path="configuracion"
-                    element={<ConfigComp formattedDate={formattedDate} />}
-                  />
-                </Routes>
-              </div>
+      <div className="container-web-viewport">
+        <div className="container container-general-dash">
+          <div className="row">
+            <div className="col-md-3 col-lg-3 col-xl-2">
+              <TabDashTry selectedComponent={selectedComponent} />
+            </div>
+            <div className="col-md-9 col-lg-9 col-xl-10 canvas-dashboard-web">
+              <Routes>
+                <Route
+                  path="/"
+                  element={<DashboardComp formattedDate={formattedDate} />}
+                />
+                <Route
+                  path="jackpots"
+                  element={
+                    <JackpotsComp
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="players"
+                  element={
+                    <PlayersComp
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="estadisticas"
+                  element={
+                    <EstComp
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="configuracion"
+                  element={
+                    <ConfigComp
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="abm/jackpots"
+                  element={
+                    <AbmComp
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="abm/usuarios"
+                  element={
+                    <AbmUsuarios
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="abm/maquinas"
+                  element={
+                    <AbmMaquinas
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="abm/casinos"
+                  element={
+                    <AbmCasinos
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="abm/grupos-casinos"
+                  element={
+                    <AbmGruposCasinos
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+                <Route
+                  path="abm/grupos-maquinas"
+                  element={
+                    <AbmGruposMaquinas
+                      formattedDate={formattedDate}
+                      selectedComponent={selectedComponent}
+                    />
+                  }
+                />
+              </Routes>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="container container-home container-mobile-viewport-app">
-          <HeaderComp />
-          <TabMobile />
-
-          <div className="container-title-top-mobile">
-            <div>
-              <h1 className="title-top">Dashboard - Inicio</h1>
-            </div>
-            <div className="container-span-items-row-not">
-              <NotComp />
-            </div>
-          </div>
-
-          <div className="container-items-row-dash-mobile-routes">
-            <div>
-              <h1 className="title-route-row span-selected">Inicio</h1>
-            </div>
-            <div>
-              <h1 className="title-route-row">Jackpots</h1>
-            </div>
-            <div>
-              <h1 className="title-route-row">Players</h1>
-            </div>
-            <div>
-              <h1 className="title-route-row span-item-row-balance-sections">
-                Config
-              </h1>
-            </div>
-          </div>
-
-          <Slider {...settings}>
-            <div>
-              <BannerMobile formattedDate={formattedDate} />
-            </div>
-            <div>
-              <BannerMobile formattedDate={formattedDate} />
-            </div>
-          </Slider>
-
-          <div className="container-row-items-sections">
-            <CardDasMobile
-              title="Configura"
-              text={textoJackpotCardMobile}
-              textButton="Configurar"
-              img={require('../images/conf.png')}
-            />
-            <CardDasMobile
-              title="Administra"
-              text={textoJackpotCardMobile2}
-              textButton="Administrar"
-              img={require('../images/mon.png')}
-            />
-            <CardDasMobile
-              title="Administra"
-              text={textoJackpotCardMobile3}
-              textButton="Administrar"
-              img={require('../images/user.png')}
-            />
-            <CardDasMobile
-              title="Accede"
-              text={textoJackpotCardMobile4}
-              textButton="Administrar"
-              img={require('../images/graf.png')}
-            />
-          </div>
-        </div>
-      </motion.div>
+      <div className="container-mobile-routes">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <DashboardMobile
+                settings={settings}
+                formattedDate={formattedDate}
+                textoJackpotCardMobile={textoJackpotCardMobile}
+                textoJackpotCardMobile2={textoJackpotCardMobile2}
+                textoJackpotCardMobile3={textoJackpotCardMobile3}
+                textoJackpotCardMobile4={textoJackpotCardMobile4}
+              />
+            }
+          />
+          <Route
+            path="jackpots"
+            element={
+              <JackpotsCompMobile
+                settings={settings}
+                formattedDate={formattedDate}
+              />
+            }
+          />
+          <Route
+            path="players"
+            element={<PlayersCompMobile formattedDate={formattedDate} />}
+          />
+          <Route
+            path="estadisticas"
+            element={<EstCompMobile formattedDate={formattedDate} />}
+          />
+          <Route
+            path="configuracion"
+            element={<ConfigCompMobile formattedDate={formattedDate} />}
+          />
+        </Routes>
+      </div>
     </Fragment>
   );
 }

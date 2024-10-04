@@ -49,3 +49,9 @@
   margin-bottom: 0px !important;
   color: #fff;
 }
+
+@media screen and (min-width: 0px) and (max-width: 768px) {
+  .title-card-success-cart {
+    font-size: 16.6px;
+  }
+}

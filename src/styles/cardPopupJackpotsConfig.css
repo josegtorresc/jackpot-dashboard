@@ -1,0 +1,97 @@
+.row-jackpot-value-span-config {
+  display: flex;
+  justify-content: normal !important;
+}
+
+/* cardPopupJackpotsConfig.css */
+
+/* Estilo del contenedor del checkbox */
+.checkbox-config-jackpot-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Estilo del checkbox personalizado */
+.checkbox-config-jackpot {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 0;
+}
+
+/* Estilo del diseño del checkbox */
+.checkbox-config-jackpot-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px; /* Tamaño del checkbox */
+  width: 20px; /* Tamaño del checkbox */
+  background-color: #fff; /* Color de fondo del checkbox */
+  border: 2px solid #ccc; /* Bordes del checkbox */
+}
+
+/* Estilo del checkmark (marca de verificación) */
+.checkbox-config-jackpot-checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Estilo del checkmark cuando está marcado */
+.checkbox-config-jackpot:checked + .checkbox-config-jackpot-checkmark:after {
+  display: block;
+}
+
+/* Estilo de la marca de verificación */
+.checkbox-config-jackpot-checkmark:after {
+  content: '';
+  left: 6px; /* Posición horizontal de la marca de verificación */
+  top: 2px; /* Posición vertical de la marca de verificación */
+  width: 5px; /* Tamaño horizontal de la marca de verificación */
+  height: 10px; /* Tamaño vertical de la marca de verificación */
+  border: solid #f16529; /* Color de la marca de verificación */
+  border-width: 0 3px 3px 0; /* Estilo de la marca de verificación */
+  transform: rotate(45deg); /* Rotar la marca de verificación */
+}
+
+.checkbox-config-jackpot-label {
+  margin-left: 35px;
+}
+
+.checkbox-config-jackpot-label {
+  font-size: 18px;
+}
+
+.span-btn-config {
+  position: absolute;
+  display: block;
+  bottom: 50px;
+  left: 10%;
+}
+
+.span-btn-config-button {
+  width: 79%;
+}
+
+.btn-config-abm-jackpots {
+  padding: 11px 45px;
+  border-radius: 15px;
+  background: #f16529;
+  color: #fff;
+  border: none !important;
+  margin-top: 40px;
+}
+
+.amount-jackpot-selection-amount {
+  margin-bottom: 0px !important;
+  font-weight: bold;
+}
+
+.container-jackpot-selection-amount.selectedConfig {
+  background: rgba(241, 101, 41, 0.5);
+  color: #fff;
+  transition: 0.2s;
+}

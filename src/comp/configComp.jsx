@@ -11,8 +11,9 @@ import myAudio from '../audios/alert.mp3';
 import { Link } from 'react-router-dom';
 import DropComp from './dropComp';
 import NotComp from './notComp';
+import CardReportComp from './cardReportComp';
 
-function ConfigComp({ formattedDate }) {
+function ConfigComp({ formattedDate, selectedComponent }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -53,116 +54,49 @@ function ConfigComp({ formattedDate }) {
   return (
     <Fragment>
       <BannerSuccess banner={bannerSuccess} title="Jackpot actualizado!!" />
-      <div
-        className={`container-items-popup-detail-show ${
-          active ? '' : 'container-items-popup-detail'
-        }`}
-      >
-        <div className="card-popup-detail">
-          <img
-            className="img-close-popup-deatil"
-            src={require('../images/close.png')}
-            alt="close"
-            onClick={closePopupDetail}
-          />
-          <h1 className="title-card-trigger">Administración de triggers</h1>
-          <div className="row-jackpot-value">
-            <h1 className="title-jackpot-row-value">Jackpot oro</h1>
-            <input
-              className="input-row-value-jackpot"
-              type="text"
-              placeholder="Valor oro 1200"
-            />
-          </div>
-          <div className="row-jackpot-value">
-            <h1 className="title-jackpot-row-value">Jackpot plata</h1>
-            <input
-              className="input-row-value-jackpot"
-              type="text"
-              placeholder="Valor plata 750"
-            />
-          </div>
-          <div className="row-jackpot-value">
-            <h1 className="title-jackpot-row-value">Jackpot bronce</h1>
-            <input
-              className="input-row-value-jackpot"
-              type="text"
-              placeholder="Valor bronce 500"
-            />
-          </div>
+      <CardReportComp active={active} closePopupDetail={closePopupDetail} />
 
-          <div className="row-jackpot-value">
-            <button
-              className="btn-row-jackpot-actualization-value"
-              onClick={showBannerSuccess}
-            >
-              Actualizar valores
-            </button>
+      <div className="container-title-top-dash-general">
+        <h1 className="title-top-dash-general">
+          Dashboard -{' '}
+          <span className="span-title-dash-view-mobile">
+            (ADM) Configuraciones
+          </span>
+        </h1>
+        <DropComp selectedComponent={selectedComponent} />
+        <h1 className="title-top-dash-hour">14:23:00 PM</h1>
+        <NotComp />
+      </div>
+
+      <Slider {...settings}>
+        <div>
+          <BannerDash
+            title="Configura lo que necesites"
+            formattedDate={formattedDate}
+          />
+        </div>
+        <div>
+          <BannerDash
+            title="Ve las estadísticas"
+            formattedDate={formattedDate}
+          />
+        </div>
+      </Slider>
+      <div className="container container-dash-items-row">
+        <div className="row">
+          <div className="col-md-12 col-xl-6 col-lg-12">
+            <div className="card-dash-items-row">
+              <CompDash
+                title="Genera un reporte"
+                text={textoJackpotConfig}
+                textBtn="Configurar"
+                img={require('../images/repor.png')}
+                click={handleClickJackpotTrigger}
+              />
+            </div>
           </div>
         </div>
       </div>
-      <motion.div
-        transition={{
-          duration: 0.3,
-          delay: 0.3,
-          ease: [0.5, 0.71, 1, 1.5],
-        }}
-        initial={{ opacity: 0 }}
-        exit={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <div className="container-title-top-dash-general">
-          <h1 className="title-top-dash-general">
-            Dashboard -{' '}
-            <span className="span-title-dash-view-mobile">
-              PrometeoIT Solutions
-            </span>
-          </h1>
-          <DropComp />
-          <h1 className="title-top-dash-hour">14:23:00 PM</h1>
-          <NotComp />
-        </div>
-
-        <Slider {...settings}>
-          <div>
-            <BannerDash
-              title="Configura lo que necesites"
-              formattedDate={formattedDate}
-            />
-          </div>
-          <div>
-            <BannerDash
-              title="Ve las estadísticas"
-              formattedDate={formattedDate}
-            />
-          </div>
-        </Slider>
-        <div className="container container-dash-items-row">
-          <div className="row">
-            <div className="col-md-12 col-xl-6 col-lg-12">
-              <div className="card-dash-items-row">
-                <CompDash
-                  title="Configura los jakcpots"
-                  text={textoJackpot}
-                  textBtn="Configurar"
-                  img={require('../images/conf.png')}
-                  click={handleClickJackpotTrigger}
-                />
-              </div>
-            </div>
-            <div className="col-md-12 col-xl-6 col-lg-12">
-              <div className="card-dash-items-row">
-                <CompDash
-                  title="Genera un reporte"
-                  text={textoJackpotConfig}
-                  textBtn="Configurar"
-                  img={require('../images/repor.png')}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
     </Fragment>
   );
 }

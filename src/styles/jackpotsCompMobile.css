@@ -1,0 +1,50 @@
+.container-banner-absolute-detail-mobile {
+  width: 100% !important;
+  height: 160px;
+  margin-top: -60px;
+  background: linear-gradient(to right, #e2a115, #f5af19);
+}
+
+.container-mobile-card-banner {
+  position: relative !important;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f16529;
+  width: 100%;
+  height: 190px;
+  border-radius: 15px;
+  margin-top: -95px;
+  position: relative;
+  box-shadow: 1px 1px 100px 1px rgba(17, 23, 21, 0.2);
+  margin-bottom: 40px;
+  padding: 15px;
+}
+
+.title-banner-mobile-card {
+  position: absolute;
+  top: 120px;
+  color: #fff;
+  font-size: 22px;
+}
+
+.title-banner-mobile-card-right {
+  position: absolute;
+  top: 120px;
+  right: 18px;
+  color: #fff;
+  font-size: 22px;
+}
+
+.span-absolute-routes {
+  width: 92.5%;
+  position: absolute;
+  top: 70px;
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.span-routes-detail {
+  background-color: #f5f5f5 !important;
+}

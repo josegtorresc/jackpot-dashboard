@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 
-function CardNot({ title, text, img }) {
+function CardNot({ title, text, img, onClick }) {
   return (
     <Fragment>
-      <div className="card-aside-inside-not">
+      <div className="card-aside-inside-not" onClick={onClick}>
         <div className="col-inside">
           <img className="img-icon-card-inside" src={img} alt="moneda" />
         </div>

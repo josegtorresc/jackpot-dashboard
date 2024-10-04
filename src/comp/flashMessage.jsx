@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/flashMessage.css';
+import '../styles/flashMessageStatic.css';
 
 function FlashMessage() {
   const [isVisible, setIsVisible] = useState(true);

@@ -1,20 +1,36 @@
 import React, { Fragment, useState } from 'react';
-import '../styles/login.css';
 import { motion } from 'framer-motion';
-import Banner from './banner';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Banner from './banner';
+import '../styles/login.css';
+import { useUser } from '../services/UserContext';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
+  const { updateUser, user } = useUser();
 
-  const handleLogin = () => {
-    if (username === 'prometeoit' && password === '1234') {
-      setLoginError('');
-      navigate('/dashboard');
-    } else {
+  const handleLogin = async () => {
+    try {
+      const response = await axios.get('https://jackpot-backend.vercel.app/api/users');
+
+      const users = response.data;
+      const loggedInUser = users.find(
+        (user) => user.name === username && user.idUser === password,
+      );
+
+      if (loggedInUser) {
+        updateUser(loggedInUser);
+        setLoginError('');
+        navigate('/dashboard');
+      } else {
+        setLoginError('Usuario o contraseña incorrectos');
+      }
+    } catch (error) {
+      console.error('Error logging in:', error.message);
       setLoginError('Usuario o contraseña incorrectos');
     }
   };
@@ -54,15 +70,7 @@ function Login() {
 
               <input
                 className="input-wel"
-                placeholder="Ingrese contraseña"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <input
-                className="input-wel"
-                placeholder="Vuelva a ingresar la contraseña"
+                placeholder="Ingrese contraseña (ID)"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -76,7 +84,7 @@ function Login() {
                 Ingresar al dashboard
               </button>
             </div>
-            {loginError && <p className="error-message">{loginError}</p>}
+            {loginError && <Banner title={loginError} />}
           </div>
         </motion.div>
       </div>

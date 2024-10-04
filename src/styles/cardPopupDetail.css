@@ -1,0 +1,71 @@
+.input-row-mobile-jackpot {
+  padding: 9px 15px;
+  text-align: center;
+  border-radius: 100px;
+  border: 1.5px solid #f16529;
+}
+
+.btn-edit-jackpot {
+  position: absolute;
+  right: 210px;
+  bottom: 30px;
+  border-radius: 15px;
+  padding: 11px 35px;
+  color: #fff;
+  background: #f16529;
+  border: none !important;
+}
+
+.btn-submit-jackpot {
+  border-radius: 15px;
+  padding: 11px 35px;
+  color: #fff;
+  background: #f16529;
+  border: none !important;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.btn-cancel-edit {
+  border-radius: 15px;
+  padding: 11px 35px;
+  color: #000;
+  background: transparent;
+  border: 1px solid #f16529;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.ReactModal__Overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed !important;
+  inset: 0px !important;
+  z-index: 10000000000 !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(3px) !important;
+}
+
+.ReactModal__Content {
+  position: relative !important;
+  inset: 0px !important;
+  padding: 45px !important;
+  border-radius: 15px !important;
+}
+
+.btn-confirm-overlay {
+  padding: 8px 17px;
+  border-radius: 15px;
+  background: #f16529;
+  color: #fff;
+  border: none !important;
+  margin-right: 15px;
+}
+
+.btn-cancel-overlay {
+  padding: 8px 17px;
+  background: transparent;
+  border: 1px solid #f16529;
+  border-radius: 15px;
+}

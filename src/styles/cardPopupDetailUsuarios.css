@@ -1,0 +1,35 @@
+.input-row-mobile-jackpot {
+  padding: 9px 15px;
+  text-align: center;
+  border-radius: 100px;
+  border: 1.5px solid #f16529;
+}
+
+.btn-edit-jackpot {
+  position: absolute;
+  right: 210px;
+  bottom: 30px;
+  border-radius: 15px;
+  padding: 11px 35px;
+  color: #fff;
+  background: #f16529;
+  border: none !important;
+}
+
+.btn-submit-jackpot {
+  border-radius: 15px;
+  padding: 11px 35px;
+  color: #fff;
+  background: #f16529;
+  border: none !important;
+  margin-right: 10px;
+}
+
+.btn-cancel-edit {
+  border-radius: 15px;
+  padding: 11px 35px;
+  color: #000;
+  background: transparent;
+  border: 1px solid #f16529;
+  margin-right: 10px;
+}
