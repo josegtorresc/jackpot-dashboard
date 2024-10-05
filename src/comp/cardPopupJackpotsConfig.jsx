@@ -18,6 +18,20 @@ function CardPopupJackpotsConfig({
     option3: false,
   });
 
+  const [allowedLevels, setAllowedLevels] = useState({
+    oro: false,
+    plata: false,
+    bronce: false,
+    inicial: false,
+  });
+
+
+  const handleLevelChange = (event) => {
+    const { name, checked } = event.target;
+    setAllowedLevels({ ...allowedLevels, [name]: checked });
+  };
+
+
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     setCheckboxState({ ...checkboxState, [name]: checked });
@@ -59,8 +73,30 @@ function CardPopupJackpotsConfig({
     );
   };
 
-  const handleClickConfigSend = () => {
-    showBannerSuccessConfig(true);
+  const handleClickConfigSend = async () => {
+    if (!selectedJackpot) return;
+  
+    const selectedLevels = Object.keys(allowedLevels).filter(
+      (level) => allowedLevels[level]
+    );
+  
+    try {
+      await axios.post(
+        `https://jackpot-backend.vercel.app/api/updateJackpotLevels/${selectedJackpot.id}`,
+        {
+          allowedLevels: selectedLevels, 
+        },
+      );
+  
+      showBannerSuccessConfig(true);
+      addNotification({
+        text: `Niveles del ${selectedJackpot.title} actualizados: ${selectedLevels.join(', ')}`,
+        date: new Date().toLocaleString(),
+        img: require('../images/conf.png'),
+      });
+    } catch (error) {
+      console.error('Error al actualizar los niveles del jackpot:', error);
+    }
   };
 
   const handleJackpotClick = (jackpotId) => {
@@ -174,32 +210,23 @@ function CardPopupJackpotsConfig({
             {step === 2 && (
               <Fragment>
                 <div className="card-selected-act-jack-text-espc">
-                  {`Las configuraciones seran los mas especificas posibles para cada jackpot en particular, definirán como se comportará el jackpot en un contexto determinado `}
+                  {`Las configuraciones serán específicas para cada jackpot, definiendo el comportamiento en un contexto determinado.`}
                 </div>
-                {['config1', 'config2', 'config3'].map((configId, index) => (
-                  <motion.div
-                    key={configId}
-                    className={`container-jackpot-selection-amount ${
-                      selectedConfigs.includes(configId) ? 'selectedConfig' : ''
-                    }`}
-                    onClick={() => handleClickConfig(configId)}
-                    whileHover={{ scale: 1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <img
-                      className="img-jackpot-selection-amount"
-                      src={require('../images/conf.png')}
-                      alt="moneda"
-                    />
-                    <h1 className="text-jackpot-selection-amount">
-                      {index === 0
-                        ? 'Apuestas mayores a 100 USD'
-                        : index === 1
-                        ? 'Jugadores con Nivel Oro'
-                        : 'Lanzar premio al llegar al trigger'}
-                    </h1>
-                  </motion.div>
+
+                {['oro', 'plata', 'bronce', 'inicial'].map((level) => (
+                  <div key={level}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        name={level}
+                        checked={allowedLevels[level]}
+                        onChange={handleLevelChange}
+                      />
+                      {`Nivel ${level.charAt(0).toUpperCase() + level.slice(1)}`}
+                    </label>
+                  </div>
                 ))}
+
                 <button
                   className="btn-config-abm-jackpots"
                   onClick={handleClickConfigSend}
@@ -208,6 +235,7 @@ function CardPopupJackpotsConfig({
                 </button>
               </Fragment>
             )}
+
           </div>
         </div>
       </div>
