@@ -33,6 +33,7 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
   const [loadingCasinos, setLoadingCasinos] = useState(true);
   const [loadingGruposCasinos, setLoadingGruposCasinos] = useState(true);
   const [loadingGruposMaquinas, setLoadingGruposMaquinas] = useState(true);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const fetchMaquinas = async () => {
@@ -116,8 +117,41 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
     }
   };
 
+
+  const validateStep = () => {
+    const newErrors = {};
+    
+    if (step === 1) {
+      if (!formData.nombre) {
+        newErrors.nombre = 'El nombre es obligatorio';
+      }
+      if (!formData.trigger) {
+        newErrors.trigger = 'El trigger es obligatorio';
+      }
+      if (!formData.monto) {
+        newErrors.monto = 'El monto inicial es obligatorio';
+      }
+    }
+    
+    if (step === 2) {
+      if (!formData.idCasino) {
+        newErrors.idCasino = 'Debes seleccionar un casino';
+      }
+      if (!formData.idMaquina) {
+        newErrors.idMaquina = 'Debes seleccionar una máquina';
+      }
+    }
+  
+    setErrors(newErrors);
+    
+    return Object.keys(newErrors).length === 0;
+  };
+
+
   const handleNextStep = () => {
-    setStep(step + 1);
+    if (validateStep()) {
+      setStep(step + 1);
+    }
   };
 
   const handlePreviousStep = () => {
@@ -197,6 +231,7 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
                       name="nombre"
                       value={formData.nombre}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <div className="card-items-row-abm">
@@ -208,6 +243,7 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
                       name="trigger"
                       value={formData.trigger}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                 </div>
@@ -232,6 +268,7 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
                       name="idAutomatico"
                       value={formData.idAutomatico}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                 </div>

@@ -103,12 +103,6 @@ function CardPopupEstComp({ popupDetail, closePopupDetailEst, transaction }) {
             </div>
             */}
             <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">Apuesta:</h1>
-              <p className="text-row-mobile-jackpot">
-                ${transaction.totalAmountWon}
-              </p>
-            </div>
-            <div className="row-popup-mobile-jackpot">
               <h1 className="title-row-mobile-jackpot">ID Operación:</h1>
               <p className="text-row-mobile-jackpot">
                 {transaction.transactionId}
@@ -118,13 +112,37 @@ function CardPopupEstComp({ popupDetail, closePopupDetailEst, transaction }) {
               <h1 className="title-row-mobile-jackpot">Locación / Casino:</h1>
               <p className="text-row-mobile-jackpot">{transaction.timeZone}</p>
             </div>
-            {/*
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Apuesta Realizada:</h1>
+              <p className="text-row-mobile-jackpot">${transaction.betAmount}</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Jackpot Afectado:</h1>
+              <p className="text-row-mobile-jackpot">{transaction.affectedJackpot}</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Porcentaje Aportado:</h1>
+              <p className="text-row-mobile-jackpot">{transaction.totalBetPercentage}%</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Cantidad Aportada:</h1>
+              {Object.entries(transaction.contributions).map(([jackpotName, contribution]) => (
+                <p key={jackpotName} className="text-row-mobile-jackpot">
+                  {jackpotName}: ${contribution}
+                </p>
+              ))}
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Cantidad Ganada:</h1>
+              <p className="text-row-mobile-jackpot">${transaction.remainingAmountForPlayer.toFixed(2)}</p>
+            </div>
+            {/* 
             <h1 className="title-row-mobile-jackpot">
               Atribuciones a los jackpots
             </h1>
             {transaction.jackpotsWon &&
               renderJackpotsWon(transaction.jackpotsWon)}
-               */}
+              */}
           </div>
         </div>
       </div>

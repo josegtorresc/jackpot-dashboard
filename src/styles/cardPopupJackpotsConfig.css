@@ -95,3 +95,18 @@
   color: #fff;
   transition: 0.2s;
 }
+
+
+.btn-bet-jackpots-config{
+  padding: 10px 16px;
+  border:none !important;
+  border-radius: 100px;
+}
+
+.input-bet-jackpots-config{
+  width: 100px;
+  margin: 0px 20px;
+  text-align: center;
+  border: none !important;
+  font-size: 30px;
+}

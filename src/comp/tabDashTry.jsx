@@ -85,9 +85,7 @@ function TabDashTry({ selectedComponent }) {
 
         <NavLink to="/">
           <div
-            className={`item-tab-dash-options ${
-              selectedComponent === 'dashboard/configuracion' ? 'selected' : ''
-            }`}
+            className='item-tab-dash-options'
             onClick={handleLogout}
           >
             <h1 className="text-tab-dash-options">Cerrar Sesión</h1>
