@@ -34,6 +34,22 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
   const [loadingGruposCasinos, setLoadingGruposCasinos] = useState(true);
   const [loadingGruposMaquinas, setLoadingGruposMaquinas] = useState(true);
   const [errors, setErrors] = useState({});
+  const [allowedLevels, setAllowedLevels] = useState({
+    oro: false,
+    plata: false,
+    bronce: false,
+    inicial: false,
+  });
+  const [minBet, setMinBet] = useState(0);
+  const [maxBet, setMaxBet] = useState(0);
+  const [percentage, setPercentage] = useState(0);
+  const [jackpotId, setJackpotId] = useState(null);
+
+  
+  const handleLevelChange = (event) => {
+    const { name, checked } = event.target;
+    setAllowedLevels({ ...allowedLevels, [name]: checked });
+  };
 
   useEffect(() => {
     const fetchMaquinas = async () => {
@@ -181,21 +197,51 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
     fileInputRef.current.click();
   };
 
+  const handleSubmitConfig = async (jackpotId) => {
+
+    const selectedLevels = Object.keys(allowedLevels).filter(level => allowedLevels[level]);
+    const configData = {
+      allowedLevels: selectedLevels,
+      minBet: minBet,
+      maxBet: maxBet,
+      betPercentage: percentage,
+    };
+  
+    try {
+      const response = await axios.post(
+        `https://jackpot-backend.vercel.app/api/updateJackpotLevels/${jackpotId}`,  
+        configData
+      );
+  
+      if (response.status === 200) {
+        console.log('Configuración enviada con éxito:', response.data);
+      }
+    } catch (error) {
+      console.error('Error al enviar la configuración:', error);
+    }
+  };
+
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
         'https://jackpot-backend.vercel.app/api/jackpots',
         formData,
       );
-      const notification = {
-        text: `Se ha creado un nuevo jackpot (${formData.nombre})`,
-        date: new Date().toLocaleString(),
-        img: require('../images/conf.png'),
-      };
-      addNotification(notification);
-      showBannerJackpotCreated();
+
+      
       if (response.status === 201) {
+        const createdJackpotId = response.data.id; 
+        setJackpotId(createdJackpotId);
+  
+        const notification = {
+          text: `Se ha creado un nuevo jackpot (${formData.nombre})`,
+          date: new Date().toLocaleString(),
+          img: require('../images/conf.png'),
+        };
+        addNotification(notification);
+        showBannerJackpotCreated();
         handleSetBannerOpen();
+        await handleSubmitConfig(createdJackpotId);
         console.log(formData);
       }
     } catch (error) {
@@ -213,6 +259,10 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
       idAutomatico: generateUniqueId(),
     }));
   }, []);
+
+  
+  
+  
 
   const renderStepContent = () => {
     switch (step) {
@@ -431,22 +481,92 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
             </div>
           </div>
         );
-      case 3:
+        case 3:
+  return (
+    <div className="step-content" key="step4">
+
+      <div className="level-selection">
+        <p>Seleccionar Niveles Permitidos:</p>
+        {['oro', 'plata', 'bronce', 'inicial'].map((level) => (
+          <div key={level}>
+            <label>
+              <input
+                type="checkbox"
+                name={level}
+                checked={allowedLevels[level]}
+                onChange={handleLevelChange}
+              />
+              {`Nivel ${level.charAt(0).toUpperCase() + level.slice(1)}`}
+            </label>
+          </div>
+        ))}
+      </div>
+
+      <div className="bet-adjustment">
+        <label>Apuesta Mínima:</label>
+        <button onClick={() => setMinBet((prev) => Math.max(0, prev - 1))}>-</button>
+        <input
+          type="number"
+          value={minBet}
+          onChange={(e) => setMinBet(Math.max(0, parseFloat(e.target.value)))}
+        />
+        <button onClick={() => setMinBet((prev) => prev + 1)}>+</button>
+      </div>
+
+      <div className="bet-adjustment">
+        <label>Apuesta Máxima:</label>
+        <button onClick={() => setMaxBet((prev) => Math.max(0, prev - 1))}>-</button>
+        <input
+          type="number"
+          value={maxBet}
+          onChange={(e) => setMaxBet(Math.max(0, parseFloat(e.target.value)))}
+        />
+        <button onClick={() => setMaxBet((prev) => prev + 1)}>+</button>
+      </div>
+
+      <div className="percentage-adjustment">
+        <label>Porcentaje de Apuesta:</label>
+        <button onClick={() => setPercentage((prev) => Math.max(0, prev - 1))}>-</button>
+        <input
+          type="number"
+          value={percentage}
+          onChange={(e) => setPercentage(Math.max(0, parseFloat(e.target.value)))}
+        />
+        <button onClick={() => setPercentage((prev) => prev + 1)}>+</button>
+      </div>
+
+      <button
+        className="btn-config-abm-jackpots"
+        onClick={handleNextStep}
+      >
+        Confirmar Configuración
+      </button>
+    </div>
+  );
+
+      case 4:
         return (
           <div className="step-content" key="step3">
-            <div className="container span-container-abm-card-jackpots">
-              <h1 className="text-row-card-abm">Resumen</h1>
-              <p>Nombre: {formData.nombre}</p>
-              <p>Trigger: {formData.trigger}</p>
-              <p>Monto: {formData.monto}</p>
-              <p>ID Automático: {formData.idAutomatico}</p>
-              <p>ID Casino: {formData.idCasino}</p>
-              <p>ID Máquina: {formData.idMaquina}</p>
-              <button onClick={handleSubmit} className="btn-abm-card-jackpots">
-                Confirmar
-              </button>
-            </div>
+          <div className="container span-container-abm-card-jackpots">
+            <h1 className="text-row-card-abm">Resumen</h1>
+            <p>Nombre: {formData.nombre}</p>
+            <p>Trigger: {formData.trigger}</p>
+            <p>Monto: {formData.monto}</p>
+            <p>ID Automático: {formData.idAutomatico}</p>
+            <p>ID Casino: {formData.idCasino}</p>
+            <p>ID Máquina: {formData.idMaquina}</p>
+            <p>Niveles Permitidos: {Object.keys(allowedLevels).filter(level => allowedLevels[level]).join(', ')}</p>
+            <p>Apuesta Mínima: {minBet}</p>
+            <p>Apuesta Máxima: {maxBet}</p>
+            <p>Porcentaje de Apuesta: {percentage}%</p>
+            
+            <button  onClick={async () => {
+            await handleSubmit(); 
+          }} className="btn-abm-card-jackpots">
+              Confirmar Jackpot y Configuración
+            </button>
           </div>
+        </div>
         );
       default:
         return null;
