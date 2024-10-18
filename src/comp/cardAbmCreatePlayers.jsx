@@ -11,8 +11,22 @@ function CardAbmCreatePlayers({ onClosePopupAbm }) {
     username: '',
     nivel: '',
   });
+  const [levels, setLevels] = useState([]); 
   const [bannerAbm, setBannerAbm] = useState(false);
   const { addNotification } = useContext(NotificationContext);
+
+  useEffect(() => {
+    const fetchLevels = async () => {
+      try {
+        const response = await axios.get('https://jackpot-backend.vercel.app/api/levels');
+        setLevels(response.data); 
+      } catch (error) {
+        console.error('Error al obtener los niveles:', error);
+      }
+    };
+
+    fetchLevels(); 
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -95,7 +109,7 @@ function CardAbmCreatePlayers({ onClosePopupAbm }) {
                         name="idPlayer"
                         value={formData.idPlayer}
                         onChange={handleInputChange}
-                        readOnly 
+                        readOnly
                       />
                     </div>
                     <div className="card-items-row-abm">
@@ -113,14 +127,20 @@ function CardAbmCreatePlayers({ onClosePopupAbm }) {
                   <div className="col-md-6">
                     <div className="card-items-row-abm">
                       <h1 className="text-row-card-abm">Nivel</h1>
-                      <input
+                      {/* Aquí mostramos el select de niveles obtenidos de la API */}
+                      <select
                         className="input-abm-card"
-                        type="text"
-                        placeholder="Ingrese Nivel"
                         name="nivel"
                         value={formData.nivel}
                         onChange={handleInputChange}
-                      />
+                      >
+                        <option value="">Seleccione un nivel</option>
+                        {levels.map((level) => (
+                          <option key={level.id} value={level.nivel}>
+                            {level.nivel}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
                 </div>

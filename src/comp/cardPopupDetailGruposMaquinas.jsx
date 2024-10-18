@@ -104,7 +104,7 @@ const CardPopupDetailGruposMaquinas = ({
   const handleSubmit = async () => {
     try {
       await axios.put(
-        `https://jackpot-backend.vercel.app/api/modificar_grupos_maquinas/${grupoMaquinas.idGrupoMaquina}`,
+        `https://jackpot-backend.vercel.app/api/grupos_maquinas/${grupoMaquinas.idGrupoMaquina}`,
         formData,
       );
       showBannerJackpotCreated();

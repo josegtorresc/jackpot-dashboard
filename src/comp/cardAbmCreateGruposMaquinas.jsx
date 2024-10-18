@@ -60,7 +60,7 @@ function CardAbmCreateGruposMaquinas({ onClosePopupAbm }) {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:5006/api/grupos_maquinas',
+        'https://jackpot-backend.vercel.app/api/grupos_maquinas',
         formData,
       );
       const notification = {

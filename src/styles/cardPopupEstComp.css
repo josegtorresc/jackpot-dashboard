@@ -109,3 +109,19 @@
   left: 25px;
   width: 25px;
 }
+
+.card-inside-popup-jackpot-web-levels{
+  width: 100%;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-create-level{
+  padding: 10px 25px;
+    text-align: center;
+    border-radius: 100px;
+    border: 1.5px solid #f16529;
+}

@@ -51,7 +51,8 @@ function CardPopupJackpotsConfig({
 const [percentage, setPercentage] = useState(0); 
 const [minBet, setMinBet] = useState(0); 
 const [maxBet, setMaxBet] = useState(0);
-  
+const [availableLevels, setAvailableLevels] = useState([]);
+
 
   useEffect(() => {
     fetchJackpotAmounts();
@@ -76,6 +77,21 @@ const [maxBet, setMaxBet] = useState(0);
     );
   };
 
+
+  useEffect(() => {
+    const fetchAvailableLevels = async () => {
+      try {
+        const response = await axios.get('https://jackpot-backend.vercel.app/api/levels');
+        setAvailableLevels(response.data);
+      } catch (error) {
+        console.error('Error al obtener los niveles:', error);
+      }
+    };
+    
+    fetchAvailableLevels();
+  }, []);
+  
+
   const handleClickConfigSend = async () => {
     if (!selectedJackpot) return;
   
@@ -85,14 +101,29 @@ const [maxBet, setMaxBet] = useState(0);
   
     const configData = {
       allowedLevels: selectedLevels,
-      minBet: isNaN(minBet) ? selectedJackpot.minBet : minBet,
-      maxBet: isNaN(maxBet) ? selectedJackpot.maxBet : maxBet,
-      betPercentage: isNaN(percentage) ? selectedJackpot.betPercentage : percentage,
     };
+  
+    if (!isNaN(minBet) && minBet > 0) {
+      configData.minBet = minBet;
+    } else {
+      configData.minBet = selectedJackpot.minBet;
+    }
+  
+    if (!isNaN(maxBet) && maxBet > 0) {
+      configData.maxBet = maxBet;
+    } else {
+      configData.maxBet = selectedJackpot.maxBet;
+    }
+  
+    if (!isNaN(percentage) && percentage > 0) {
+      configData.betPercentage = percentage;
+    } else {
+      configData.betPercentage = selectedJackpot.betPercentage;
+    }
   
     try {
       await axios.post(
-        `http://localhost:5000/api/updateJackpotLevels/${selectedJackpot.id}`,
+        `https://jackpot-backend.vercel.app/api/updateJackpotLevels/${selectedJackpot.id}`,
         configData
       );
   
@@ -107,33 +138,33 @@ const [maxBet, setMaxBet] = useState(0);
     }
   };
   
+  
 
   const handleJackpotClick = async (jackpotId) => {
     const clickedJackpot = jackpots.find((jackpot) => jackpot.id === jackpotId);
-    console.log('Jackpot clickeado:', clickedJackpot);
     if (clickedJackpot) {
       setSelectedJackpot(clickedJackpot);
       setStep(2);
   
       try {
-        const encodedId = encodeURIComponent(jackpotId);
         const response = await axios.get(
-         `https://jackpot-backend.vercel.app/api/jackpot/${encodedId}`,
+          `https://jackpot-backend.vercel.app/api/jackpot/${encodeURIComponent(jackpotId)}/levels`
         );
         const jackpotData = response.data;
-        setCurrentAllowedLevels(jackpotData.allowedLevels || []);
+  
         setAllowedLevels({
           oro: jackpotData.allowedLevels.includes('oro'),
           plata: jackpotData.allowedLevels.includes('plata'),
           bronce: jackpotData.allowedLevels.includes('bronce'),
           inicial: jackpotData.allowedLevels.includes('inicial'),
         });
+  
         setSelectedJackpot({
           ...clickedJackpot,
-          ...jackpotData, 
+          ...jackpotData,
         });
       } catch (error) {
-        console.error('Error al obtener los detalles del jackpot:', error);
+        console.error('Error al obtener los niveles permitidos del jackpot:', error);
       }
     }
   };
@@ -196,12 +227,13 @@ const renderJackpotDetails = () => (
       {`Detalles del jackpot: ${selectedJackpot.nombre}`}
     </div>
     <div className="jackpot-details">
+    <p><strong>Identificador:</strong> {selectedJackpot.idAutomatico}</p>
       <p><strong>Monto actual:</strong> {selectedJackpot.amount}</p>
       <p><strong>Porcentaje de apuesta:</strong> {selectedJackpot.betPercentage}%</p>
       <p><strong>Apuesta mínima:</strong> {selectedJackpot.minBet}</p>
       <p><strong>Apuesta máxima:</strong> {selectedJackpot.maxBet}</p>
       <p><strong>Contribuciones:</strong> {selectedJackpot.contributions}</p>
-      <p><strong>Máximo Monto:</strong> {selectedJackpot.monto}</p>
+      <p><strong>Trigger:</strong> {selectedJackpot.maxAmount}</p>
       <p><strong>Niveles Permitidos:</strong> {selectedJackpot.allowedLevels.join(', ')}</p>
     </div>
   </Fragment>
@@ -356,26 +388,24 @@ const renderJackpotDetails = () => (
 
                 <div className="current-allowed-levels">
                   <p>
-                    <strong>Niveles actuales permitidos:</strong>{' '}
-                    {currentAllowedLevels.length > 0
-                      ? currentAllowedLevels.join(', ')
-                      : 'No hay niveles configurados'}
+                    <strong>Niveles actuales permitidos:</strong>
                   </p>
                 </div>
 
-                {['oro', 'plata', 'bronce', 'inicial'].map((level) => (
-                  <div key={level}>
+                {availableLevels.map((level) => (
+                  <div key={level.id}>
                     <label>
                       <input
                         type="checkbox"
-                        name={level}
-                        checked={allowedLevels[level]}
+                        name={level.nivel}
+                        checked={allowedLevels[level.nivel]}
                         onChange={handleLevelChange}
                       />
-                      {`Nivel ${level.charAt(0).toUpperCase() + level.slice(1)}`}
+                      {level.nivel.charAt(0).toUpperCase() + level.nivel.slice(1)}
                     </label>
                   </div>
                 ))}
+
 
                 <button
                   className="btn-config-abm-jackpots"

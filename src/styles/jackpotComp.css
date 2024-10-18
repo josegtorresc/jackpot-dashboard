@@ -142,3 +142,16 @@
   padding: 20px;
   margin-bottom: 30px;
 }
+
+
+.span-players-list{
+padding: 20px !important;
+}
+
+.span-table-players{
+  margin-top: -50px;
+}
+
+.span-level{
+  margin-bottom: 40px;
+}

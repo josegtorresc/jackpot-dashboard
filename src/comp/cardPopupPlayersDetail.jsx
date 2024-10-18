@@ -12,15 +12,17 @@ function CardPopupPlayersDetail({
   const { addNotification } = useContext(NotificationContext);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [players, setPlayers] = useState([]);
+  const [levels, setLevels] = useState([]); 
   const [step, setStep] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
   const [editedData, setEditedData] = useState({ nivel: '' });
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchPlayers();
+    fetchLevels(); 
   }, []);
 
-  // Fetch the existing players from the API
   const fetchPlayers = async () => {
     try {
       const response = await axios.get(
@@ -32,7 +34,17 @@ function CardPopupPlayersDetail({
     }
   };
 
-  // Handle click on a player to show their details
+  const fetchLevels = async () => {
+    try {
+      const response = await axios.get(
+        'https://jackpot-backend.vercel.app/api/levels', 
+      );
+      setLevels(response.data); 
+    } catch (error) {
+      console.error('Error al obtener los niveles:', error);
+    }
+  };
+
   const handlePlayerClick = (playerId) => {
     const clickedPlayer = players.find((player) => player.idPlayer === playerId);
     if (clickedPlayer) {
@@ -55,7 +67,6 @@ function CardPopupPlayersDetail({
     setEditedData({ ...editedData, [name]: value });
   };
 
-  // Update the player's information
   const handleEditPlayer = async () => {
     if (!selectedPlayer) return;
 
@@ -72,7 +83,6 @@ function CardPopupPlayersDetail({
     }
   };
 
-  // Activate or deactivate the player
   const handleTogglePlayerStatus = async () => {
     if (!selectedPlayer) return;
 
@@ -88,6 +98,23 @@ function CardPopupPlayersDetail({
       console.error('Error al cambiar el estado del jugador:', error);
     }
   };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value.toLowerCase());
+  };
+
+  const filteredPlayers = players.filter((player) => {
+    const { idPlayer, username, nivel, status, balance } = player;
+    
+    return (
+      idPlayer?.toLowerCase().includes(searchTerm) ||
+      username?.toLowerCase().includes(searchTerm) ||
+      (nivel?.toLowerCase().includes(searchTerm)) || 
+      status?.toLowerCase().includes(searchTerm) ||
+      balance?.toString().toLowerCase().includes(searchTerm)
+    );
+  });
+  
 
   return (
     <Fragment>
@@ -118,10 +145,18 @@ function CardPopupPlayersDetail({
           </div>
 
           <div className="card-inside-popup-jackpot-web card-inside-popup-jackpot-web-span-amounts">
+
             {step === 1 && (
               <Fragment>
-                {players.length > 0 ? (
-                  players.map((player) => (
+                 <input
+                  type="text"
+                  placeholder="Buscar jugador..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                  className="input-row-value-jackpot span-level"
+                />
+                 {filteredPlayers.length > 0 ? (
+                  filteredPlayers.map((player) => (
                     <motion.div
                       key={player.idPlayer}
                       className={`container-jackpot-selection-amount ${
@@ -164,14 +199,19 @@ function CardPopupPlayersDetail({
 
                   {isEditing ? (
                     <Fragment>
-                      <input
+                  <p className="span-selected-comp">Establecer nivel:</p>
+                      <select
                         className="input-row-value-jackpot span-selected-comp"
-                        type="text"
-                        placeholder="Nuevo nivel"
                         name="nivel"
                         value={editedData.nivel}
-                        onChange={handleChange}
-                      />
+                        onChange={(e) => setEditedData({ ...editedData, nivel: e.target.value })}
+                      >
+                        {levels.map((level) => (
+                          <option key={level.id} value={level.nivel}>
+                            {level.nivel}
+                          </option>
+                        ))}
+                      </select>
                       <button
                         className="btn-row-jackpot-actualization-value span-selected-comp"
                         onClick={handleEditPlayer}

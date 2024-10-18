@@ -44,6 +44,8 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
   const [maxBet, setMaxBet] = useState(0);
   const [percentage, setPercentage] = useState(0);
   const [jackpotId, setJackpotId] = useState(null);
+  const [levels, setLevels] = useState([]);
+
 
   
   const handleLevelChange = (event) => {
@@ -110,6 +112,20 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
 
     fetchGruposMaquinas();
   }, []);
+
+  useEffect(() => {
+    const fetchLevels = async () => {
+      try {
+        const response = await axios.get('https://jackpot-backend.vercel.app/api/levels');
+        setLevels(response.data); 
+      } catch (error) {
+        console.error('Error al obtener los niveles:', error);
+      }
+    };
+  
+    fetchLevels();
+  }, []);
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -378,7 +394,9 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
                         ) : gruposCasino.length === 0 ? (
                           <li>No hay grupos de casino disponibles</li>
                         ) : (
-                          gruposCasino.map((casino) => (
+                          <>
+                          <strong>Grupos Casino</strong>
+                          {gruposCasino.map((casino) => (
                             <li key={casino.id}>
                               <button
                                 className="dropdown-item"
@@ -393,8 +411,10 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
                                 {casino.idGrupoCasino}
                               </button>
                             </li>
-                          ))
+                          ))}
+                          </>
                         )}
+                        
                       </ul>
                     </div>
                   </div>
@@ -487,20 +507,25 @@ function CardAbmCreate({ onClosePopupAbm, showBannerJackpotCreated }) {
 
       <div className="level-selection">
         <p>Seleccionar Niveles Permitidos:</p>
-        {['oro', 'plata', 'bronce', 'inicial'].map((level) => (
-          <div key={level}>
-            <label>
-              <input
-                type="checkbox"
-                name={level}
-                checked={allowedLevels[level]}
-                onChange={handleLevelChange}
-              />
-              {`Nivel ${level.charAt(0).toUpperCase() + level.slice(1)}`}
-            </label>
-          </div>
-        ))}
+        {levels.length > 0 ? (
+          levels.map((level) => (
+            <div key={level.id}>
+              <label>
+                <input
+                  type="checkbox"
+                  name={level.nivel}
+                  checked={allowedLevels[level.nivel]}
+                  onChange={handleLevelChange}
+                />
+                {`Nivel ${level.nivel.charAt(0).toUpperCase() + level.nivel.slice(1)}`}
+              </label>
+            </div>
+          ))
+        ) : (
+          <p>Cargando niveles...</p>
+        )}
       </div>
+
 
       <div className="bet-adjustment">
         <label>Apuesta Mínima:</label>

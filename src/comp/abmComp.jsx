@@ -178,64 +178,151 @@ function AbmComp({ formattedDate, selectedComponent }) {
           <div className="col-md-12 col-lg-12 col-xl-12">
             <div className="card-items-row-transactions">
               <div className="table-container">
-                {jackpots.length > 0 ? (
-                  <>
-                    <div className="table-header">
-                      <div className="item-section-row-header">
-                        <strong>ID Maquina</strong>
-                      </div>
-                      <div className="item-section-row-header">
-                        <strong>Estado</strong>
-                      </div>
-                      <div className="item-section-row-header">
-                        <strong>ID Casino</strong>
-                      </div>
-                      <div className="item-section-row-header">
-                        <strong>ID Jackpot</strong>
-                      </div>
-                      <div className="item-section-row-header">
-                        <strong>Monto Inicial</strong>
-                      </div>
-                      <div className="item-section-row-header">
-                        <strong>Nombre</strong>
-                      </div>
-                      <div className="item-section-row-header">
-                        <strong>Trigger</strong>
-                      </div>
-                    </div>
-                    {jackpots.map((jackpot, index) => (
-                      <div
-                        key={index}
-                        className="item-section-row-complete"
-                        onClick={() => showPopupDetail(jackpot)}
-                      >
-                        <div className="item-section-row-data">
-                          <p>#{jackpot.idMaquina}</p>
-                        </div>
-                        <div className="item-section-row-data">
-                          <p>{jackpot.active ? 'Activo' : 'Inactivo'}</p>
-                        </div>
-                        <div className="item-section-row-data">
-                          <p>#{jackpot.idCasino}</p>
-                        </div>
-                        <div className="item-section-row-data">
-                          <p>#{jackpot.id}</p>
-                        </div>
-                        <div className="item-section-row-data">
-                          <p>{jackpot.amount}</p>
-                        </div>
-                        <div className="item-section-row-data">
-                          <p>{jackpot.nombre}</p>
-                        </div>
-                        <div className="item-section-row-data">
-                          <p>{jackpot.maxAmount}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </>
-                ) : (
-                  <FlashMessageStatic />
-                )}
+              {jackpots.length > 0 ? (
+        <>
+          <div className="table-header">
+            {/* Renderizamos los nombres de los atributos si están presentes */}
+            {jackpots.some(jackpot => jackpot.active !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Activo</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.allowedLevels !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Niveles Permitidos</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.amount !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Monto</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.betPercentage !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Porcentaje Apuesta</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.contributions !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Contribuciones</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.idAutomatico !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>ID Automático</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.idCasino !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>ID Casino</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.idMaquina !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>ID Máquina</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.maxAmount !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Monto Máximo</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.maxBet !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Apuesta Máxima</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.minBet !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Apuesta Mínima</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.trigger !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Trigger</strong>
+              </div>
+            )}
+            {jackpots.some(jackpot => jackpot.nombre !== undefined) && (
+              <div className="item-section-row-header">
+                <strong>Nombre</strong>
+              </div>
+            )}
+          </div>
+
+          {/* Renderizamos dinámicamente solo los valores presentes */}
+          {jackpots.map((jackpot, index) => (
+            <div key={index} className="item-section-row-complete" onClick={() => showPopupDetail(jackpot)}>
+              {jackpot.active !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.active ? 'Activo' : 'Inactivo'}</p>
+                </div>
+              )}
+              {jackpot.allowedLevels !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.allowedLevels.join(', ')}</p>
+                </div>
+              )}
+              {jackpot.amount !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.amount}</p>
+                </div>
+              )}
+              {jackpot.betPercentage !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.betPercentage}</p>
+                </div>
+              )}
+              {jackpot.contributions !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.contributions}</p>
+                </div>
+              )}
+              {jackpot.idAutomatico !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.idAutomatico}</p>
+                </div>
+              )}
+              {jackpot.idCasino !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.idCasino}</p>
+                </div>
+              )}
+              {jackpot.idMaquina !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.idMaquina}</p>
+                </div>
+              )}
+              {jackpot.maxAmount !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.maxAmount}</p>
+                </div>
+              )}
+              {jackpot.maxBet !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.maxBet}</p>
+                </div>
+              )}
+              {jackpot.minBet !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.minBet}</p>
+                </div>
+              )}
+              {jackpot.trigger !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.trigger}</p>
+                </div>
+              )}
+              {jackpot.nombre !== undefined && (
+                <div className="item-section-row-data">
+                  <p>{jackpot.nombre}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </>
+      ) : (
+        <FlashMessageStatic />
+      )}
               </div>
             </div>
           </div>

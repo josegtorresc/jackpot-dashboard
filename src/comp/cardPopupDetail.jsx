@@ -15,12 +15,17 @@ const CardPopupDetail = ({
   const { addNotification } = useContext(NotificationContext);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    nombre: jackpot.nombre,
-    trigger: jackpot.maxAmount,
-    monto: jackpot.amount,
-    idAutomatico: jackpot.idAutomatico,
-    idCasino: jackpot.idCasino,
-    idMaquina: jackpot.idMaquina,
+    nombre: jackpot.nombre || '',
+    trigger: jackpot.maxAmount || '',
+    monto: jackpot.amount || '',
+    idAutomatico: jackpot.idAutomatico || '',
+    idCasino: jackpot.idCasino || '',
+    idMaquina: jackpot.idMaquina || '',
+    minBet: jackpot.minBet || '',
+    maxBet: jackpot.maxBet || '',
+    betPercentage: jackpot.betPercentage || '',
+    contributions: jackpot.contributions || '',
+    allowedLevels: jackpot.allowedLevels?.join(', ') || '',
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState('');
@@ -65,7 +70,7 @@ const CardPopupDetail = ({
     try {
       await axios.put(
         `https://jackpot-backend.vercel.app/api/jackpots/${jackpot.idAutomatico}`,
-        formData,
+        { ...formData, allowedLevels: formData.allowedLevels.split(', ') },
       );
       showBannerJackpotCreated();
       const notification = {
@@ -91,7 +96,7 @@ const CardPopupDetail = ({
   const renderEditForm = () => (
     <div className="card-inside-popup-jackpot-web card-inside-popup-jackpot-web-span-amounts">
       <div className="row-popup-mobile-jackpot">
-        <h1 className="title-row-mobile-jackpot">Nombre del jackpot</h1>
+        <h1 className="title-row-mobile-jackpot">Nombre</h1>
         <input
           className="input-row-mobile-jackpot"
           type="text"
@@ -101,40 +106,56 @@ const CardPopupDetail = ({
         />
       </div>
       <div className="row-popup-mobile-jackpot">
-        <h1 className="title-row-mobile-jackpot">ID Maquina</h1>
+        <h1 className="title-row-mobile-jackpot">Trigger</h1>
         <input
           className="input-row-mobile-jackpot"
           type="text"
-          name="idMaquina"
-          value={formData.idMaquina}
+          name="trigger"
+          value={formData.trigger}
           onChange={handleInputChange}
         />
       </div>
       <div className="row-popup-mobile-jackpot">
-        <h1 className="title-row-mobile-jackpot">Estado</h1>
-        <p className="text-row-mobile-jackpot">
-          {jackpot.active ? 'Activo' : 'Inactivo'}
-        </p>
-      </div>
-      <div className="row-popup-mobile-jackpot">
-        <h1 className="title-row-mobile-jackpot">ID Casino</h1>
+        <h1 className="title-row-mobile-jackpot">Monto</h1>
         <input
           className="input-row-mobile-jackpot"
           type="text"
-          name="idCasino"
-          value={formData.idCasino}
+          name="monto"
+          value={formData.monto}
           onChange={handleInputChange}
         />
       </div>
       <div className="row-popup-mobile-jackpot">
-        <h1 className="title-row-mobile-jackpot">ID Jackpot</h1>
-        <p className="text-row-mobile-jackpot">{formData.idAutomatico}</p>
+        <h1 className="title-row-mobile-jackpot">Apuesta Mínima</h1>
+        <input
+          className="input-row-mobile-jackpot"
+          type="number"
+          name="minBet"
+          value={formData.minBet}
+          onChange={handleInputChange}
+        />
       </div>
-
-      <button
-        className="btn-submit-jackpot"
-        onClick={() => openModal('submit')}
-      >
+      <div className="row-popup-mobile-jackpot">
+        <h1 className="title-row-mobile-jackpot">Apuesta Máxima</h1>
+        <input
+          className="input-row-mobile-jackpot"
+          type="number"
+          name="maxBet"
+          value={formData.maxBet}
+          onChange={handleInputChange}
+        />
+      </div>
+      <div className="row-popup-mobile-jackpot">
+        <h1 className="title-row-mobile-jackpot">Porcentaje de Apuesta</h1>
+        <input
+          className="input-row-mobile-jackpot"
+          type="number"
+          name="betPercentage"
+          value={formData.betPercentage}
+          onChange={handleInputChange}
+        />
+      </div>
+      <button className="btn-submit-jackpot" onClick={() => openModal('submit')}>
         Guardar Cambios
       </button>
       <button className="btn-cancel-edit" onClick={() => setIsEditing(false)}>
@@ -185,35 +206,41 @@ const CardPopupDetail = ({
           renderEditForm()
         ) : (
           <div className="card-inside-popup-jackpot-web card-inside-popup-jackpot-web-span-amounts">
-            <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">Nombre del jackpot</h1>
-              <p className="text-row-mobile-jackpot">{jackpot.nombre}</p>
+             <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Identificador</h1>
+              <p className="text-row-mobile-jackpot">{formData.idAutomatico}</p>
             </div>
             <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">ID Maquina</h1>
-              <p className="text-row-mobile-jackpot">{jackpot.idMaquina}</p>
-            </div>
-            <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">Estado</h1>
-              <p className="text-row-mobile-jackpot">
-                {jackpot.active ? 'Activo' : 'Inactivo'}
-              </p>
-            </div>
-            <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">ID Casino</h1>
-              <p className="text-row-mobile-jackpot">{jackpot.idCasino}</p>
-            </div>
-            <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">ID Jackpot</h1>
-              <p className="text-row-mobile-jackpot">{jackpot.idAutomatico}</p>
-            </div>
-            <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">Monto Inicial</h1>
-              <p className="text-row-mobile-jackpot">{jackpot.amount}</p>
+              <h1 className="title-row-mobile-jackpot">Nombre</h1>
+              <p className="text-row-mobile-jackpot">{formData.nombre}</p>
             </div>
             <div className="row-popup-mobile-jackpot">
               <h1 className="title-row-mobile-jackpot">Trigger</h1>
-              <p className="text-row-mobile-jackpot">{jackpot.maxAmount}</p>
+              <p className="text-row-mobile-jackpot">{formData.trigger}</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Monto</h1>
+              <p className="text-row-mobile-jackpot">{formData.monto}</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Apuesta Mínima</h1>
+              <p className="text-row-mobile-jackpot">{formData.minBet}</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Apuesta Máxima</h1>
+              <p className="text-row-mobile-jackpot">{formData.maxBet}</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Porcentaje de Apuesta</h1>
+              <p className="text-row-mobile-jackpot">{formData.betPercentage}%</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Contribuciones</h1>
+              <p className="text-row-mobile-jackpot">{formData.contributions}</p>
+            </div>
+            <div className="row-popup-mobile-jackpot">
+              <h1 className="title-row-mobile-jackpot">Niveles Permitidos</h1>
+              <p className="text-row-mobile-jackpot">{formData.allowedLevels}</p>
             </div>
             <button
               className="btn-edit-jackpot"

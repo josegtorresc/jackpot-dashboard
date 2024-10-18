@@ -107,15 +107,11 @@ function CardPopupEstComp({ popupDetail, closePopupDetailEst, transaction = {} }
               <p className="text-row-mobile-jackpot">${transaction.betAmount || 'N/A'}</p>
             </div>
             <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">Jackpot Afectado:</h1>
-              <p className="text-row-mobile-jackpot">{transaction.affectedJackpot || 'N/A'}</p>
-            </div>
-            <div className="row-popup-mobile-jackpot">
               <h1 className="title-row-mobile-jackpot">Porcentaje Aportado:</h1>
               <p className="text-row-mobile-jackpot">{transaction.totalBetPercentage || 0}%</p>
             </div>
             <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">Cantidad Aportada:</h1>
+              <h1 className="title-row-mobile-jackpot">Atribuciones:</h1>
               {transaction.contributions
                 ? Object.entries(transaction.contributions).map(([jackpotName, contribution]) => (
                   <p key={jackpotName} className="text-row-mobile-jackpot">
@@ -126,7 +122,7 @@ function CardPopupEstComp({ popupDetail, closePopupDetailEst, transaction = {} }
               }
             </div>
             <div className="row-popup-mobile-jackpot">
-              <h1 className="title-row-mobile-jackpot">Cantidad Ganada:</h1>
+              <h1 className="title-row-mobile-jackpot">Cantidad Aportada a la Máquina / Casino:</h1>
               <p className="text-row-mobile-jackpot">
                 ${transaction.remainingAmountForPlayer?.toFixed(2) || 'N/A'}
               </p>

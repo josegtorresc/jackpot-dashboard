@@ -11,7 +11,6 @@ import '../styles/estComp.css';
 import axios from 'axios';
 import CardPopupEstComp from './cardPopupEstComp';
 import FlashMessageStatic from './flashMessageStatic';
-import { css } from '@emotion/react';
 import { ClipLoader, RingLoader } from 'react-spinners';
 import PopupJackpots from './popupJackpots';
 import LoadingDetailTrans from '../compsMobiles/loaderDetailTrans';
@@ -26,10 +25,6 @@ function EstComp({ formattedDate, selectedComponent }) {
     slidesToScroll: 1,
     autoplay: 1500,
   };
-
-  const textoEst = 'Administra las estadísticas<br />con clicks sencillos';
-  const textoEstGeneral =
-    'Configura las estadísticas <br />con clicks sencillos';
 
   const [jackpotsValues, setJackpotsValues] = useState({
     oro: '',
@@ -81,7 +76,7 @@ function EstComp({ formattedDate, selectedComponent }) {
         const response = await axios.get(
           'https://jackpot-backend.vercel.app/api/alljackpotscreated',
         );
-        setJackpots(response.data);
+        setJackpots(response.data || []);
         setLoadingJackpots(false);
       } catch (error) {
         console.error('Error al obtener los jackpots:', error);
@@ -107,8 +102,7 @@ function EstComp({ formattedDate, selectedComponent }) {
         const response = await axios.get(
           'https://jackpot-backend.vercel.app/api/transactions',
         );
-        const newTransactions = response.data;
-        setTransactions(newTransactions);
+        setTransactions(response.data || []); 
         setLoadingTransactions(false);
       } catch (error) {
         console.error('Error al obtener las transacciones:', error);
@@ -134,19 +128,29 @@ function EstComp({ formattedDate, selectedComponent }) {
     setSelectedTransaction(null);
   };
 
-  const filteredTransactions = transactions.filter((transaction) =>
-    Object.values(transaction).some(
-      (value) =>
-        value &&
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase()),
-    ),
-  );
+  const filteredTransactions = transactions.filter((transaction) => {
+    if (!transaction) {
+      return false; 
+    }
+  
+    if (transaction.creditsWagered !== undefined) {
+      const playerExists = transaction.player && transaction.player.firstName && transaction.player.lastName;
+      return playerExists && (
+        transaction.player.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        transaction.player.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+  
+    return Object.values(transaction || {}).some(
+      (value) => value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  });
 
   const jackpotWinners = transactions.filter((transaction) =>
-    Object.keys(transaction.jackpotsWon).some((jackpot) => {
+    transaction.jackpotsWon && Object.keys(transaction.jackpotsWon).some((jackpot) => {
       const amountWon = transaction.jackpotsWon[jackpot];
       return amountWon > 200;
-    }),
+    })
   );
 
   return (
@@ -293,158 +297,87 @@ function EstComp({ formattedDate, selectedComponent }) {
                       <strong>ID Máquina</strong>
                     </div>
                     <div className="item-section-row-header">
-                      <strong>Atribución Jackpot</strong>
-                    </div>
-                    <div className="item-section-row-header">
                       <strong>Locación</strong>
                     </div>
                     <div className="item-section-row-header">
-                      <strong>Atribución</strong>
+                      <strong>Apuesta</strong>
                     </div>
                     <div className="item-section-row-header">
                       <strong>ID Operación</strong>
                     </div>
                   </div>
-                  {filteredTransactions.map((transaction) => (
-                    <div
-                      className="item-section-row-complete"
-                      key={transaction.transactionId}
-                      onClick={() => showPopupDetail(transaction)}
-                    >
-                      <div className="item-section-row-data">
-                        <p>{transaction.timestamp}</p>
-                      </div>
-                      <div className="item-section-row-data">
-                        <p>{transaction.playerId}</p>
-                      </div>
-                      <div className="item-section-row-data">
-                        <p>{transaction.ip}</p>
-                      </div>
-                      <div className="item-section-row-data">
-                        {transaction.jackpotsWon &&
-                          Object.entries(transaction.jackpotsWon).map(
-                            ([jackpotName, amount]) => (
-                              <p key={jackpotName}>
-                                {jackpotName.charAt(0).toUpperCase() +
-                                  jackpotName.slice(1)}
-                                : ${amount}
-                              </p>
-                            ),
-                          )}
-                      </div>
-                      <div className="item-section-row-data">
-                        <p>{transaction.timeZone}</p>
-                      </div>
-                      <div className="item-section-row-data">
-                        <p>${transaction.totalAmountWon}</p>
-                      </div>
-                      <div className="item-section-row-data">
-                        <p>{transaction.transactionId}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+              
+                {filteredTransactions.map((transaction) => (
+  transaction && transaction.creditsWagered !== undefined ? (
+    <div 
+      className="item-section-row-complete" 
+      key={transaction.id} 
+      onClick={() => showPopupDetail(transaction)}
+    >
+      <div className="item-section-row-data">
+        <strong>ID Transacción:</strong>
+        <p>{transaction.id ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <strong>Apuesta:</strong>
+        <p>{transaction.creditsWagered ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <strong>Ganancias:</strong>
+        <p>{transaction.winnings ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <strong>Jugador:</strong>
+        <p>{transaction.player ? `${transaction.player.firstName} ${transaction.player.lastName}` : 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <strong>Nivel Jugador:</strong>
+        <p>{transaction.player?.level ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <strong>ID Máquina:</strong>
+        <p>{transaction.gamingMachine?.id ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <strong>Modelo Máquina:</strong>
+        <p>{transaction.gamingMachine?.modelId ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <strong>Fecha Transacción:</strong>
+        <p>{transaction.timeStamp ? new Date(transaction.timeStamp).toLocaleString() : 'No disponible'}</p>
+      </div>
+    </div>
+  ) : (
+    <div 
+      className="item-section-row-complete" 
+      key={transaction.transactionId} 
+      onClick={() => showPopupDetail(transaction)}
+    >
+      <div className="item-section-row-data">
+        <p>{transaction.timestamp ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <p>{transaction.playerId ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <p>{transaction.ip ?? 'No disponible'}</p>
+      </div>
+      
+      <div className="item-section-row-data">
+        <p>{transaction.timeZone ?? 'No disponible'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <p>${transaction.betAmount ?? '0.00'}</p>
+      </div>
+      <div className="item-section-row-data">
+        <p>{transaction.transactionId ?? 'No disponible'}</p>
+      </div>
+    </div>
+  )
+))}
 
-          <div className="container container-graf-row span-container-est-of">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="card-graf">
-                  <div>
-                    <img
-                      className="img-graf-row-est"
-                      src={require('../images/mon.png')}
-                      alt="moneda"
-                    />
-                  </div>
-                  <div>
-                    <h1 className="title-graf-row-est">Atribuciones Hoy</h1>
-                  </div>
-                  <div className="container-title-est-row-graf">
-                    {loadingTransactions ? (
-                      <ClipLoader color="orange" size={30} />
-                    ) : (
-                      <h1 className="title-est-row-graf span-text-atrb-tod">
-                        <RingLoader color={'orange'} size={45} />
-                      </h1>
-                    )}
-                  </div>
-                </div>
               </div>
-
-              <div className="col-md-6">
-                <div className="card-graf">
-                  <div>
-                    <img
-                      className="img-graf-row-est"
-                      src={require('../images/transaccion.png')}
-                      alt="moneda"
-                    />
-                  </div>
-                  <div>
-                    <h1 className="title-graf-row-est">Operaciones Hoy</h1>
-                  </div>
-                  <div className="container-title-est-row-graf">
-                    {loadingTransactions ? (
-                      <ClipLoader color="orange" size={30} />
-                    ) : (
-                      <RingLoader color={'orange'} size={45} />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h1 className="title-jackpots-winners">Listado de ganadores </h1>
-          <img
-            className="img-list-winners"
-            src={require('../images/winners.png')}
-            alt="winner"
-          />
-
-          <div className="col-md-12 col-lg-12 col-xl-12">
-            <div className="card-items-row-transactions span-list-winners-est">
-              {jackpotWinners.length === 0 ? (
-                <FlashMessageStatic />
-              ) : (
-                jackpotWinners.map((transaction) => (
-                  <div
-                    className="item-section-row-complete"
-                    key={transaction.transactionId}
-                    onClick={() => showPopupDetail(transaction)}
-                  >
-                    <strong>Fecha:</strong>
-                    <p>{transaction.timestamp}</p>
-                    <strong>ID jugador:</strong>
-                    <p>{transaction.playerId}</p>
-                    <strong>ID Máquina:</strong>
-                    <p>{transaction.ip}</p>
-                    {transaction.jackpotsWon &&
-                      Object.entries(transaction.jackpotsWon).map(
-                        ([jackpotName, amount]) => (
-                          <React.Fragment key={jackpotName}>
-                            <strong>Atribución Jackpot:</strong>
-                            <p>
-                              {jackpotName.charAt(0).toUpperCase() +
-                                jackpotName.slice(1)}
-                              : ${amount}
-                            </p>
-                          </React.Fragment>
-                        ),
-                      )}
-                    <strong>Locación:</strong>
-                    <p>{transaction.timeZone}</p>
-                    <strong>Atribución:</strong>
-                    <p>${transaction.totalAmountWon}</p>
-                    <strong>Apuesta:</strong>
-                    <p>${transaction.betAmount}</p>
-                    <strong>ID Operación:</strong>
-                    <p>{transaction.transactionId}</p>
-                  </div>
-                ))
+              
               )}
             </div>
           </div>
